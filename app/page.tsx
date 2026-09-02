@@ -86,16 +86,13 @@ export default function Home() {
         <section className="field-lines ambient relative">
           <div className="grid lg:grid-cols-12">
             <div className="flex flex-col justify-center border-b border-[color:var(--rule)] px-5 py-8 sm:px-8 sm:py-10 lg:col-span-5 lg:border-b-0 lg:border-r lg:py-14">
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="signal-square bg-[var(--vermilion)]" aria-hidden="true" />
-                  <p className="eyebrow">{siteConfig.status}</p>
-                </div>
-                <p className="mono text-[0.58rem] uppercase tracking-[0.1em] text-[var(--ink3)]">SYSTEM / 001</p>
+              <div className="flex items-center gap-3">
+                <span className="signal-square bg-[var(--vermilion)]" aria-hidden="true" />
+                <p className="eyebrow">{siteConfig.status}</p>
               </div>
 
               <h1 className="mt-7 max-w-[22ch] text-[clamp(2.4rem,7.6vw,5.2rem)] font-[560] leading-[0.86] tracking-[-0.075em] sm:mt-9">
-                Executable simulation runtime for <span className="text-[var(--vermilion)]">AI agents.</span>
+                Executable simulation runtime for <span className="text-[var(--cobalt)]">AI agents.</span>
               </h1>
               <span className="mt-6 block h-px w-14 bg-[var(--vermilion)]" aria-hidden="true" />
               <p className="mt-6 max-w-[38rem] text-[clamp(1rem,2.4vw,1.2rem)] leading-[1.45] tracking-[-0.02em] text-[var(--ink2)] sm:mt-7">
@@ -138,48 +135,29 @@ export default function Home() {
         </section>
 
         <section id="how" className="scroll-mt-28 border-t border-[color:var(--rule)]">
-          <div className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
-            <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-              <p className="eyebrow text-[var(--ink3)]">How it runs / 002</p>
-            </div>
-            <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
-              <h2 className="max-w-4xl text-[clamp(2.3rem,5.4vw,5.4rem)] font-[520] leading-[0.9] tracking-[-0.07em]">
-                Your planner proposes. Your backend computes.{' '}
-                <span className="text-[var(--vermilion)]">Vivacity keeps the world they share.</span>
-              </h2>
-            </div>
+          <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:p-12">
+            <h2 className="max-w-4xl text-[clamp(2.3rem,5.4vw,5.4rem)] font-[520] leading-[0.9] tracking-[-0.07em]">
+              Your planner proposes. Your backend computes.{' '}
+              <span className="text-[var(--cobalt)]">Vivacity keeps the world they share.</span>
+            </h2>
           </div>
           <div className="grid grid-cols-2 gap-px bg-[var(--rule2)] lg:grid-cols-4">
-            {proofs.map(([index, title, copy]) => (
-              <div key={title} className="proof-cell relative flex min-h-52 flex-col justify-between overflow-hidden bg-[var(--bg)] p-5 sm:min-h-56 sm:p-7">
-                <div className="flex items-center justify-between">
-                  <span className="mono text-[0.58rem] text-[var(--ink3)]">/{index}</span>
-                  <span className="h-1.5 w-1.5 bg-[var(--vermilion)]" aria-hidden="true" />
-                </div>
-                <span className="pointer-events-none absolute -right-2 top-8 font-sans text-[6.5rem] font-[700] leading-none tracking-[-0.1em] text-[var(--ink)] opacity-[0.06]" aria-hidden="true">
-                  {index}
-                </span>
-                <div>
-                  <span className="mb-4 block h-px w-8 bg-[var(--bronze)]" aria-hidden="true" />
-                  <p className="text-[clamp(1.5rem,2.2vw,2.1rem)] leading-[0.95] tracking-[-0.05em]">{title}</p>
-                  <p className="mt-3 max-w-xs text-sm leading-6 text-[var(--ink2)]">{copy}</p>
-                </div>
+            {proofs.map(([, title, copy], index) => (
+              <div key={title} className="proof-cell flex min-h-48 flex-col justify-end bg-[var(--bg)] p-5 sm:min-h-52 sm:p-7">
+                <span className={`mb-4 block h-px w-8 ${index % 2 === 0 ? 'bg-[var(--cobalt)]' : 'bg-[var(--vermilion)]'}`} aria-hidden="true" />
+                <p className="text-[clamp(1.5rem,2.2vw,2.1rem)] leading-[0.95] tracking-[-0.05em]">{title}</p>
+                <p className="mt-3 max-w-xs text-sm leading-6 text-[var(--ink2)]">{copy}</p>
               </div>
             ))}
           </div>
         </section>
 
         <section id="system" className="scroll-mt-28 border-t border-[color:var(--rule)]">
-          <div className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
-            <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-              <p className="eyebrow text-[var(--ink3)]">System / 003</p>
-            </div>
-            <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
-              <h2 className="max-w-5xl text-[clamp(2.4rem,5.6vw,6rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
-                The layer between<br />
-                <span className="text-[var(--vermilion)]">intent and consequence.</span>
-              </h2>
-            </div>
+          <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:p-12">
+            <h2 className="max-w-5xl text-[clamp(2.4rem,5.6vw,6rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
+              The layer between<br />
+              <span className="text-[var(--vermilion)]">intent and consequence.</span>
+            </h2>
           </div>
           <div className="system-boundary grid lg:grid-cols-[1fr_1.45fr_1fr]">
             <article className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:border-b-0">
@@ -222,11 +200,8 @@ export default function Home() {
 
       <section className="ambient bg-[var(--panel)] text-[var(--panel-ink)]">
         <div className="site-shell !border-white/15">
-          <div className="grid border-b border-white/15 lg:grid-cols-12">
-            <div className="border-b border-white/15 p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-              <p className="eyebrow text-white/45">Runtime contract / 004</p>
-            </div>
-            <Reveal className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
+          <div className="border-b border-white/15 p-5 sm:p-8 lg:p-12">
+            <Reveal>
               <h2 className="max-w-5xl text-[clamp(2.6rem,6.4vw,6.8rem)] font-[510] leading-[0.86] tracking-[-0.07em]">
                 A world that <span className="text-[var(--vermilion)]">continues.</span>
               </h2>
@@ -252,7 +227,6 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-12">
             <div className="border-b border-white/15 p-5 sm:p-8 lg:col-span-5 lg:border-b-0 lg:border-r">
-              <p className="eyebrow mb-6 text-white/45">Fork before you commit</p>
               <h3 className="max-w-md text-[clamp(2rem,4.2vw,4.2rem)] leading-[0.92] tracking-[-0.055em]">
                 Try three futures. Keep the one that holds.
               </h3>
@@ -270,10 +244,9 @@ export default function Home() {
       <div className="site-shell">
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow mb-16 text-[var(--ink3)]">Execution routing / 005</p>
             <h2 className="max-w-md text-[clamp(2.4rem,5vw,5.2rem)] font-[520] leading-[0.88] tracking-[-0.065em]">
               Same contract.{' '}
-              <span className="text-[var(--vermilion)]">The backend that fits.</span>
+              <span className="text-[var(--cobalt)]">The backend that fits.</span>
             </h2>
             <p className="mt-7 max-w-sm text-sm leading-6 text-[var(--ink2)]">
               Vivacity picks an executor per transition, then writes the result back into the same world state.
@@ -292,18 +265,13 @@ export default function Home() {
         </section>
 
         <section className="border-b border-[color:var(--rule)]">
-          <div className="grid lg:grid-cols-12">
-            <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-              <p className="eyebrow text-[var(--ink3)]">State and observation / 006</p>
-            </div>
-            <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
-              <Reveal>
-                <h2 className="text-[clamp(2.4rem,5.8vw,5.8rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
-                  State is what is true.<br />
-                  <span className="text-[var(--vermilion)]">Observation is what an agent sees.</span>
-                </h2>
-              </Reveal>
-            </div>
+          <div className="p-5 sm:p-8 lg:p-12">
+            <Reveal>
+              <h2 className="text-[clamp(2.4rem,5.8vw,5.8rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
+                State is what is true.<br />
+                <span className="text-[var(--vermilion)]">Observation is what an agent sees.</span>
+              </h2>
+            </Reveal>
           </div>
 
           <div className="grid gap-px bg-[var(--rule2)] md:grid-cols-3">
@@ -314,23 +282,15 @@ export default function Home() {
         </section>
 
         <section id="use-cases" className="scroll-mt-28 border-b border-[color:var(--rule)]">
-          <div className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
-            <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-              <p className="eyebrow text-[var(--ink3)]">Where it runs / 007</p>
-            </div>
-            <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
-              <h2 className="max-w-4xl text-[clamp(2.3rem,5vw,5.2rem)] font-[520] leading-[0.9] tracking-[-0.065em]">
-                Built for stacks that already have an agent and a world.
-              </h2>
-            </div>
+          <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:p-12">
+            <h2 className="max-w-4xl text-[clamp(2.3rem,5vw,5.2rem)] font-[520] leading-[0.9] tracking-[-0.065em]">
+              Built for stacks that already have an agent and a world.
+            </h2>
           </div>
           <div className="grid gap-px bg-[var(--rule2)] sm:grid-cols-2 lg:grid-cols-4">
             {useCases.map(([tag, title, copy], index) => (
               <Reveal key={title} className="use-card flex min-h-60 flex-col justify-between bg-[var(--bg)] p-5 sm:p-7">
-                <div className="flex items-center justify-between">
-                  <span className="eyebrow text-[var(--cobalt)]">{tag}</span>
-                  <span className="mono text-[0.55rem] text-[var(--ink3)]">0{index + 1}</span>
-                </div>
+                <span className={`eyebrow ${index % 2 === 0 ? 'text-[var(--cobalt)]' : 'text-[var(--vermilion)]'}`}>{tag}</span>
                 <div>
                   <p className="text-2xl leading-[1.05] tracking-[-0.04em]">{title}</p>
                   <p className="mt-4 text-sm leading-6 text-[var(--ink2)]">{copy}</p>
@@ -342,9 +302,8 @@ export default function Home() {
 
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[var(--ink3)]">Questions / 008</p>
-            <h2 className="mt-12 max-w-xs text-[clamp(2rem,3.8vw,3.4rem)] leading-[0.92] tracking-[-0.055em]">
-              The usual ones.
+            <h2 className="max-w-xs text-[clamp(2rem,3.8vw,3.4rem)] leading-[0.92] tracking-[-0.055em]">
+              Questions
             </h2>
           </div>
           <div className="faq lg:col-span-8">
@@ -360,20 +319,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="grid min-h-[68svh] lg:grid-cols-12">
-          <div className="flex flex-col justify-between border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[var(--ink3)]">Public beta / demo access</p>
-            <p className="mono mt-12 max-w-xs text-[0.62rem] leading-5 text-[var(--ink3)]">
-              FOR TEAMS WITH AN AGENT,<br />
-              A BACKEND, AND A WORLD<br />
-              THEY ALREADY RUN
-            </p>
-          </div>
-          <div className="flex flex-col justify-between p-5 sm:p-8 lg:col-span-8 lg:p-12">
+        <section className="grid min-h-[56svh] lg:grid-cols-12">
+          <div className="flex flex-col justify-between p-5 sm:p-8 lg:col-span-12 lg:p-12">
             <Reveal>
               <h2 className="max-w-5xl text-[clamp(2.8rem,6.8vw,7.4rem)] font-[510] leading-[0.84] tracking-[-0.075em]">
                 Bring your intelligence.<br />
-                <span className="text-[var(--vermilion)]">Bring your execution.</span>
+                <span className="text-[var(--cobalt)]">Bring your execution.</span>
               </h2>
             </Reveal>
             <div className="mt-14 grid gap-px bg-[var(--rule2)] sm:grid-cols-[1fr_auto]">

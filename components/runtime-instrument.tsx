@@ -115,11 +115,11 @@ export function RuntimeInstrument() {
         </div>
       </div>
 
-      <div className="grid grid-cols-4 border-b border-white/20 md:grid-cols-8">
+      <div className="hidden grid-cols-8 border-b border-white/20 md:grid">
         {stages.map((stage, index) => (
-          <div key={stage} className={`border-r border-b border-white/15 px-2 py-2.5 last:border-r-0 md:border-b-0 md:px-3 md:py-3 ${index === 5 ? 'bg-[#2455FF]' : ''}`}>
-            <span className="mono block text-[0.52rem] text-white/35 md:text-[0.55rem]">0{index + 1}</span>
-            <span className="mono mt-1 block text-[0.55rem] uppercase tracking-[0.08em] md:text-[0.6rem]">{stage}</span>
+          <div key={stage} className={`border-r border-white/15 px-3 py-3 last:border-r-0 ${index === 5 ? 'bg-[#2455FF]' : ''}`}>
+            <span className="mono block text-[0.55rem] text-white/35">0{index + 1}</span>
+            <span className="mono mt-1 block text-[0.6rem] uppercase tracking-[0.08em]">{stage}</span>
           </div>
         ))}
       </div>
