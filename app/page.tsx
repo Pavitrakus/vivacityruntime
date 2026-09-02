@@ -1,5 +1,8 @@
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Plus } from 'lucide-react';
+import { CodeTrace } from '@/components/code-trace';
+import { HeroConsole } from '@/components/hero-console';
+import { ObservationPlate } from '@/components/observation-plate';
 import { RuntimeInstrument } from '@/components/runtime-instrument';
 import { Reveal } from '@/components/reveal';
 import { SiteFooter } from '@/components/site-footer';
@@ -7,143 +10,195 @@ import { SiteHeader } from '@/components/site-header';
 import { demoHref, demoLinkProps, siteConfig } from '@/lib/site-config';
 
 const contract = [
-  ['01', 'Describe', 'world.spec accepted'],
-  ['02', 'Compile', 'state graph created'],
-  ['03', 'Inspect', 'observation resolved'],
-  ['04', 'Act', 'intent validated'],
-  ['05', 'Fork', 'lineage isolated'],
-  ['06', 'Execute', 'backend selected'],
-  ['07', 'Verify', 'invariants checked'],
-  ['08', 'Observe', 'next view emitted'],
+  ['01', 'Describe', 'World spec accepted'],
+  ['02', 'Compile', 'State graph created'],
+  ['03', 'Inspect', 'Observation resolved'],
+  ['04', 'Act', 'Intent validated'],
+  ['05', 'Fork', 'Lineage isolated'],
+  ['06', 'Execute', 'Backend selected'],
+  ['07', 'Verify', 'Invariants checked'],
+  ['08', 'Observe', 'Next view emitted'],
 ];
 
 const routes = [
-  ['01', 'Exact solver', 'Equations and constraints determine the transition.', 'DETERMINISTIC'],
-  ['02', 'Physics engine', 'Contact, motion, geometry, and domain dynamics.', 'STATEFUL'],
-  ['03', 'Learned world model', 'Predictive execution for worlds that resist exact reduction.', 'PROBABILISTIC'],
-  ['04', 'Custom backend', 'Private simulation logic and company-specific systems.', 'ADAPTER'],
+  ['01', 'Exact solver', 'Equations and constraints determine the next state. Same inputs, same result.', 'DETERMINISTIC'],
+  ['02', 'Physics engine', 'Contact, motion, and geometry run through a stateful engine you already trust.', 'STATEFUL'],
+  ['03', 'Learned world model', 'A predictive model stands in when the world will not reduce to closed form.', 'PROBABILISTIC'],
+  ['04', 'Custom backend', 'Private simulation logic, wrapped so it returns the same shape as everything else.', 'ADAPTER'],
 ];
 
-const observations = [
-  {
-    src: '/plate-orbit.webp',
-    index: 'OBS / 01',
-    title: 'Orbital state',
-    alt: 'False-color scientific observation of three orbital outcomes from one persistent state',
-  },
-  {
-    src: '/plate-contact.webp',
-    index: 'OBS / 02',
-    title: 'Contact action',
-    alt: 'False-color robotics observation comparing constrained gripper contact outcomes',
-  },
-  {
-    src: '/plate-fluid.webp',
-    index: 'OBS / 03',
-    title: 'Flow state',
-    alt: 'Block-sampled fluid simulation observation showing three branching wake outcomes',
-  },
+const proofs = [
+  ['01', 'One contract', 'Every backend reads and writes the same world state.'],
+  ['02', 'Isolated forks', 'A branch can fail without touching the parent.'],
+  ['03', 'Four executors', 'Exact, physics, learned, or your own adapter.'],
+  ['04', 'Evidence kept', 'Every verdict stores the facts that produced it.'],
 ];
+
+const useCases = [
+  ['Robotics', 'Manipulation & control', 'Rehearse contact-rich actions on isolated forks before a motor moves.'],
+  ['Agents', 'Autonomous planning', 'Let a planner try actions against a world that still exists on the next step.'],
+  ['Reinforcement', 'Training & eval', 'Deterministic resets, isolated rollouts, and reward signals you can replay.'],
+  ['World models', 'Digital twins', 'Keep a live twin that branches when you need to ask what-if.'],
+];
+
+const faqs = [
+  [
+    'How do I keep my current simulator?',
+    'Wrap it as an executor. Vivacity sends a transition and expects a normalized result plus the evidence used to produce it. Your engine stays in place.',
+  ],
+  [
+    'What does a fork actually do?',
+    'It copies the current world into a new lineage. Writes stay on that branch. The parent does not move until you commit a verified result, or you drop the branch.',
+  ],
+  [
+    'Which backends can I plug in?',
+    'Exact solvers, physics engines, learned world models, and custom adapters. Routing picks one per transition from the requirements you declare.',
+  ],
+  [
+    'What happens when verification fails?',
+    'The result stays attached to the branch with its evidence. Commit is blocked. The parent world is unchanged and still inspectable.',
+  ],
+  [
+    'Can we use this in production yet?',
+    'Public beta. Teams building agents, robotics, and simulation infra are on it now so the contract can settle against real stacks.',
+  ],
+];
+
+const trust = ['Robotics', 'Autonomous agents', 'Reinforcement learning', 'World models', 'Digital twins', 'Simulation infra'];
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#F2EFE6]">
+    <main className="min-h-screen bg-[var(--bg)] text-[var(--ink)]">
       <div className="site-shell">
+        <div className="announce">
+          <p className="eyebrow text-[var(--ink3)]">
+            <span className="text-[var(--vermilion)]">Public beta</span>
+            <span className="mx-2 text-[var(--rule3)] sm:mx-3">/</span>
+            <span className="hidden sm:inline">Architecture Brief 001 is live</span>
+            <span className="sm:hidden">Brief 001</span>
+          </p>
+          <Link href="/technical-brief" className="link-mark eyebrow inline-flex shrink-0 items-center gap-1 text-[var(--ink)]">
+            Read it <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+
         <SiteHeader />
 
-        <section className="hero-grid relative grid min-h-[calc(100svh-64px)] grid-cols-1 lg:grid-cols-12">
-          <div className="flex min-h-[650px] flex-col justify-between border-b border-black/20 p-5 sm:p-8 lg:col-span-5 lg:border-b-0 lg:border-r">
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <span className="signal-square bg-[#FF4B1F]" aria-hidden="true" />
-                <p className="eyebrow">{siteConfig.status}</p>
+        <section className="field-lines ambient relative">
+          <div className="grid lg:grid-cols-12">
+            <div className="flex flex-col justify-center border-b border-[color:var(--rule)] px-5 py-8 sm:px-8 sm:py-10 lg:col-span-5 lg:border-b-0 lg:border-r lg:py-14">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="signal-square bg-[var(--vermilion)]" aria-hidden="true" />
+                  <p className="eyebrow">{siteConfig.status}</p>
+                </div>
+                <p className="mono text-[0.58rem] uppercase tracking-[0.1em] text-[var(--ink3)]">SYSTEM / 001</p>
               </div>
-              <p className="mono text-[0.58rem] uppercase tracking-[0.1em] text-[#77756F]">SYSTEM / 001</p>
-            </div>
 
-            <div className="py-14 lg:py-8">
-              <p className="eyebrow mb-6 text-[#77756F]">Execution infrastructure for agentic systems</p>
-              <h1 className="max-w-[760px] text-[clamp(3.7rem,7vw,7.8rem)] font-[560] leading-[0.82] tracking-[-0.08em]">
-                Executable simulation runtime for AI agents.
+              <h1 className="mt-7 max-w-[16ch] text-[clamp(2.7rem,9vw,5.8rem)] font-[560] leading-[0.86] tracking-[-0.075em] sm:mt-9">
+                A world your agents can act in.
               </h1>
-              <p className="mt-9 max-w-[37rem] text-[clamp(1.02rem,1.45vw,1.3rem)] leading-[1.42] tracking-[-0.025em] text-[#4f4e49]">
-                Describe a world. Preserve its state. Let an agent act, branch, simulate, and verify what happens next through the right execution backend.
+              <p className="mt-6 max-w-[36rem] text-[clamp(1rem,2.4vw,1.2rem)] leading-[1.45] tracking-[-0.02em] text-[var(--ink2)] sm:mt-7">
+                Vivacity holds the world, isolates every fork, and routes each transition to the backend that can compute it. A result only becomes the next world if it verifies.
               </p>
-            </div>
 
-            <div>
-              <div className="mb-5 grid grid-cols-4 border-y border-black/20">
-                {['Persist', 'Branch', 'Route', 'Verify'].map((item, index) => (
-                  <div key={item} className="border-r border-black/20 py-3 text-center last:border-r-0">
-                    <span className="mono block text-[0.52rem] text-[#77756F]">0{index + 1}</span>
-                    <span className="mono mt-1 block text-[0.6rem] uppercase tracking-[0.08em]">{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-1 gap-px bg-black/20 sm:grid-cols-2">
+              <div className="mt-8 grid grid-cols-1 gap-px bg-[var(--rule2)] sm:mt-10 sm:grid-cols-2">
                 <a href={demoHref} {...demoLinkProps} className="cta-primary">
                   Book a technical demo <ArrowUpRight className="size-4" aria-hidden="true" />
                 </a>
                 <Link href="/technical-brief" className="cta-secondary">
-                  Read Architecture Brief 001 <span aria-hidden="true">→</span>
+                  Architecture Brief 001 <span aria-hidden="true">→</span>
                 </Link>
               </div>
             </div>
-          </div>
 
-          <div className="flex items-center p-4 sm:p-7 lg:col-span-7 lg:p-8">
-            <RuntimeInstrument />
+            <div className="border-b border-[color:var(--rule)] p-4 sm:p-6 lg:col-span-7 lg:border-b-0 lg:p-8">
+              <div className="min-h-[620px] sm:min-h-[680px] lg:hidden">
+                <HeroConsole />
+              </div>
+              <div className="product-frame hidden overflow-hidden lg:block">
+                <RuntimeInstrument />
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="grid border-t border-black/20 lg:grid-cols-12">
-          <div className="flex min-h-40 flex-col justify-between border-b border-black/20 p-5 sm:p-8 lg:col-span-4 lg:min-h-[430px] lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[#77756F]">Position / 002</p>
-            <p className="mono max-w-xs text-[0.65rem] leading-5 text-[#77756F]">
-              NOT A WORLD MODEL<br />
-              NOT A SINGLE SIMULATOR<br />
-              NOT AN AGENT FRAMEWORK
+        <section className="border-t border-[color:var(--rule)] bg-[var(--bg3)]">
+          <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] md:items-center">
+            <p className="eyebrow border-b border-[color:var(--rule)] px-5 py-4 text-[var(--ink3)] md:border-b-0 md:border-r md:px-8">
+              Will be used by teams in
             </p>
+            <div className="marquee py-4">
+              <div className="marquee__track" aria-hidden="true">
+                {[...trust, ...trust].map((item, index) => (
+                  <span key={index} className="mono flex items-center whitespace-nowrap px-8 text-sm tracking-[-0.01em] text-[var(--ink2)]">
+                    <span className="mr-3 inline-block h-1 w-1 bg-[var(--vermilion)]" /> {item}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
-          <Reveal className="flex min-h-[430px] flex-col justify-between p-5 sm:p-8 lg:col-span-8 lg:p-12">
-            <h2 className="max-w-6xl text-[clamp(3.1rem,6.7vw,8rem)] font-[520] leading-[0.84] tracking-[-0.075em]">
-              The layer between<br />
-              <span className="text-[#2455FF]">intent and consequence.</span>
-            </h2>
-            <p className="mt-14 max-w-2xl text-lg leading-7 text-[#4f4e49]">
-              Agents can reason about an action. Simulators can compute an outcome. Vivacity is the runtime contract that keeps state coherent between them.
-            </p>
-          </Reveal>
         </section>
 
-        <section className="border-t border-black/20">
-          <div className="grid border-b border-black/20 lg:grid-cols-12">
-            <div className="border-b border-black/20 p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-              <p className="eyebrow text-[#77756F]">System boundary / 003</p>
+        <section id="how" className="scroll-mt-28 border-t border-[color:var(--rule)]">
+          <div className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
+            <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
+              <p className="eyebrow text-[var(--ink3)]">How it runs / 002</p>
             </div>
             <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
-              <h2 className="max-w-5xl text-[clamp(2.7rem,5.8vw,6.6rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
-                Bring your intelligence.<br />Bring your execution.
+              <h2 className="max-w-4xl text-[clamp(2.3rem,5.4vw,5.4rem)] font-[520] leading-[0.9] tracking-[-0.07em]">
+                Your planner proposes. Your backend computes. Vivacity keeps the world they share.
+              </h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-px bg-[var(--rule2)] lg:grid-cols-4">
+            {proofs.map(([index, title, copy]) => (
+              <div key={title} className="proof-cell relative flex min-h-52 flex-col justify-between overflow-hidden bg-[var(--bg)] p-5 sm:min-h-56 sm:p-7">
+                <div className="flex items-center justify-between">
+                  <span className="mono text-[0.58rem] text-[var(--ink3)]">/{index}</span>
+                  <span className="h-1.5 w-1.5 bg-[var(--vermilion)]" aria-hidden="true" />
+                </div>
+                <span className="pointer-events-none absolute -right-2 top-8 font-sans text-[6.5rem] font-[700] leading-none tracking-[-0.1em] text-[var(--ink)] opacity-[0.06]" aria-hidden="true">
+                  {index}
+                </span>
+                <div>
+                  <span className="mb-4 block h-px w-8 bg-[var(--bronze)]" aria-hidden="true" />
+                  <p className="text-[clamp(1.5rem,2.2vw,2.1rem)] leading-[0.95] tracking-[-0.05em]">{title}</p>
+                  <p className="mt-3 max-w-xs text-sm leading-6 text-[var(--ink2)]">{copy}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="system" className="scroll-mt-28 border-t border-[color:var(--rule)]">
+          <div className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
+            <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
+              <p className="eyebrow text-[var(--ink3)]">System / 003</p>
+            </div>
+            <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
+              <h2 className="max-w-5xl text-[clamp(2.4rem,5.6vw,6rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
+                Three sides. One world.
               </h2>
             </div>
           </div>
           <div className="system-boundary grid lg:grid-cols-[1fr_1.45fr_1fr]">
-            <article className="p-5 sm:p-8">
-              <p className="eyebrow text-[#77756F]">Input / agent</p>
-              <p className="mt-16 text-3xl tracking-[-0.05em]">Chooses what to do next.</p>
-              <ul className="mono mt-10 space-y-2 text-[0.68rem] text-[#77756F]">
+            <article className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:border-b-0">
+              <p className="eyebrow text-[var(--ink3)]">Agent</p>
+              <p className="mt-8 text-[clamp(1.7rem,3vw,2.4rem)] tracking-[-0.045em] lg:mt-14">Chooses the next action.</p>
+              <ul className="mono mt-8 space-y-2 text-[0.68rem] text-[var(--ink3)]">
                 <li>goal + context</li>
                 <li>action proposal</li>
                 <li>observation request</li>
               </ul>
             </article>
-            <article className="relative overflow-hidden border-y border-black/20 bg-[#2455FF] p-5 text-white sm:p-8 lg:border-x lg:border-y-0">
+            <article className="ambient relative overflow-hidden border-b border-[color:var(--rule)] bg-[var(--cobalt)] p-5 text-white sm:p-8 lg:border-b-0 lg:border-x">
               <div className="boundary-v" aria-hidden="true">V</div>
-              <p className="eyebrow relative">Runtime / Vivacity</p>
-              <p className="relative mt-16 max-w-lg text-[clamp(2.5rem,4.2vw,5rem)] leading-[0.88] tracking-[-0.065em]">
-                Keeps the world executable.
+              <p className="eyebrow relative">Vivacity</p>
+              <p className="relative mt-8 max-w-lg text-[clamp(2.1rem,4vw,3.8rem)] leading-[0.9] tracking-[-0.06em] lg:mt-14">
+                Holds state, forks, routing, and the commit gate.
               </p>
-              <ul className="mono relative mt-10 grid grid-cols-2 gap-2 text-[0.64rem] text-white/70">
+              <ul className="mono relative mt-8 grid grid-cols-2 gap-2 text-[0.64rem] text-white/75">
                 <li>persistent state</li>
                 <li>action contract</li>
                 <li>branch lineage</li>
@@ -153,9 +208,9 @@ export default function Home() {
               </ul>
             </article>
             <article className="p-5 sm:p-8">
-              <p className="eyebrow text-[#77756F]">Output / executor</p>
-              <p className="mt-16 text-3xl tracking-[-0.05em]">Computes what happens.</p>
-              <ul className="mono mt-10 space-y-2 text-[0.68rem] text-[#77756F]">
+              <p className="eyebrow text-[var(--ink3)]">Executor</p>
+              <p className="mt-8 text-[clamp(1.7rem,3vw,2.4rem)] tracking-[-0.045em] lg:mt-14">Computes the transition.</p>
+              <ul className="mono mt-8 space-y-2 text-[0.68rem] text-[var(--ink3)]">
                 <li>exact solver</li>
                 <li>physics engine</li>
                 <li>learned model</li>
@@ -166,30 +221,30 @@ export default function Home() {
         </section>
       </div>
 
-      <section className="bg-[#08090A] text-[#F2EFE6]">
-        <div className="site-shell border-white/20">
-          <div className="grid border-b border-white/20 lg:grid-cols-12">
-            <div className="border-b border-white/20 p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-              <p className="eyebrow text-white/40">Runtime contract / 004</p>
+      <section className="ambient bg-[var(--panel)] text-[var(--panel-ink)]">
+        <div className="site-shell !border-white/15">
+          <div className="grid border-b border-white/15 lg:grid-cols-12">
+            <div className="border-b border-white/15 p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
+              <p className="eyebrow text-white/45">Runtime contract / 004</p>
             </div>
             <Reveal className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
-              <h2 className="max-w-5xl text-[clamp(3.3rem,7vw,8.4rem)] font-[510] leading-[0.82] tracking-[-0.075em]">
-                A world that<br /><span className="text-[#FF4B1F]">continues.</span>
+              <h2 className="max-w-5xl text-[clamp(2.6rem,6.4vw,6.8rem)] font-[510] leading-[0.86] tracking-[-0.07em]">
+                Eight steps from a world spec to the next view.
               </h2>
             </Reveal>
           </div>
 
           <ol className="contract-rail grid md:grid-cols-4 xl:grid-cols-8">
             {contract.map(([index, step, event]) => (
-              <li key={step} className="group min-h-48 border-b border-r border-white/20 p-4 transition-colors hover:bg-[#2455FF] xl:border-b-0">
+              <li key={step} className="group min-h-44 border-b border-r border-white/15 p-4 transition-colors hover:bg-[var(--cobalt)] xl:border-b-0">
                 <div className="flex h-full flex-col justify-between">
                   <div>
-                    <span className="mono text-[0.58rem] text-white/30">/{index}</span>
-                    <span className="mt-3 block h-1 w-1 bg-[#FF4B1F]" aria-hidden="true" />
+                    <span className="mono text-[0.58rem] text-white/35">/{index}</span>
+                    <span className="mt-3 block h-1 w-1 bg-[var(--vermilion)]" aria-hidden="true" />
                   </div>
                   <div>
                     <span className="block text-xl tracking-[-0.04em]">{step}</span>
-                    <span className="mono mt-2 block text-[0.55rem] uppercase leading-4 text-white/35 group-hover:text-white/65">{event}</span>
+                    <span className="mono mt-2 block text-[0.55rem] uppercase leading-4 text-white/40 group-hover:text-white/75">{event}</span>
                   </div>
                 </div>
               </li>
@@ -197,107 +252,136 @@ export default function Home() {
           </ol>
 
           <div className="grid lg:grid-cols-12">
-            <div className="border-b border-white/20 p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-              <p className="eyebrow mb-6 text-white/40">Branch before commitment</p>
-              <h3 className="max-w-md text-[clamp(2.4rem,4.5vw,5rem)] leading-[0.9] tracking-[-0.06em]">
-                Test consequences without corrupting the world.
+            <div className="border-b border-white/15 p-5 sm:p-8 lg:col-span-5 lg:border-b-0 lg:border-r">
+              <p className="eyebrow mb-6 text-white/45">Fork before you commit</p>
+              <h3 className="max-w-md text-[clamp(2rem,4.2vw,4.2rem)] leading-[0.92] tracking-[-0.055em]">
+                Try three futures. Keep the one that holds.
               </h3>
-              <p className="mt-8 max-w-sm text-sm leading-6 text-white/55">
-                Every fork keeps its origin. Mutations stay isolated. A verified branch can be committed, retained, or rolled back.
+              <p className="mt-7 max-w-sm text-sm leading-6 text-white/60">
+                Each fork keeps its origin. Mutations stay local. A verified branch can be committed, kept for comparison, or thrown away.
               </p>
             </div>
-            <div className="lg:col-span-8">
-              {[
-                ['BRANCH / 01', 'Δ −8.0%', 'DECAY', 'ROLLBACK'],
-                ['BRANCH / 02', 'Δ 0.0%', 'STABLE', 'CANDIDATE'],
-                ['BRANCH / 03', 'Δ +12.0%', 'ESCAPE', 'COMPARE'],
-              ].map(([name, delta, result, action], index) => (
-                <div key={name} className="branch-row grid min-h-36 grid-cols-[1.2fr_.8fr_.8fr] items-center border-b border-white/20 px-5 last:border-b-0 sm:grid-cols-4 sm:px-8">
-                  <span className="eyebrow text-white/40">{name}</span>
-                  <span className="mono text-sm">{delta}</span>
-                  <span className={`mono text-sm ${index === 1 ? 'text-[#9EFF6A]' : 'text-[#FF4B1F]'}`}>{result}</span>
-                  <span className="eyebrow hidden justify-self-end sm:block">{action}</span>
-                </div>
-              ))}
+            <div className="lg:col-span-7">
+              <CodeTrace />
             </div>
           </div>
         </div>
       </section>
 
       <div className="site-shell">
-        <section className="grid border-b border-black/20 lg:grid-cols-12">
-          <div className="border-b border-black/20 p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow mb-20 text-[#77756F]">Execution routing / 005</p>
-            <h2 className="max-w-md text-[clamp(3rem,5.4vw,6rem)] font-[520] leading-[0.86] tracking-[-0.07em]">
-              One contract.<br />The right executor.
+        <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
+          <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
+            <p className="eyebrow mb-16 text-[var(--ink3)]">Execution routing / 005</p>
+            <h2 className="max-w-md text-[clamp(2.4rem,5vw,5.2rem)] font-[520] leading-[0.88] tracking-[-0.065em]">
+              Same contract. The backend that fits.
             </h2>
-            <p className="mt-8 max-w-sm text-sm leading-6 text-[#4f4e49]">
-              Backend classes describe routing options. They do not claim a named third-party integration.
+            <p className="mt-7 max-w-sm text-sm leading-6 text-[var(--ink2)]">
+              Vivacity picks an executor per transition, then writes the result back into the same world state.
             </p>
           </div>
           <div className="lg:col-span-8">
             {routes.map(([index, title, copy, signal]) => (
-              <Reveal key={title} className="route-row grid min-h-48 grid-cols-[54px_1fr] border-b border-black/20 last:border-b-0 sm:grid-cols-[72px_1.1fr_1fr_auto]">
-                <span className="mono p-4 text-xs text-[#77756F] sm:p-6">{index}</span>
-                <h3 className="border-l border-black/20 p-4 text-[clamp(1.6rem,2.8vw,3rem)] leading-[0.95] tracking-[-0.055em] sm:p-6">{title}</h3>
-                <p className="col-span-2 border-l border-t border-black/20 p-4 text-sm leading-6 text-[#4f4e49] sm:col-span-1 sm:border-t-0 sm:p-6">{copy}</p>
-                <span className="mono hidden items-end p-6 text-[0.58rem] text-[#2455FF] sm:flex">{signal}</span>
+              <Reveal key={title} className="route-row grid min-h-40 grid-cols-[54px_1fr] border-b border-[color:var(--rule)] last:border-b-0 sm:grid-cols-[72px_1.1fr_1fr_auto]">
+                <span className="mono p-4 text-xs text-[var(--ink3)] sm:p-6">{index}</span>
+                <h3 className="border-l border-[color:var(--rule)] p-4 text-[clamp(1.45rem,2.6vw,2.5rem)] leading-[0.98] tracking-[-0.05em] sm:p-6">{title}</h3>
+                <p className="col-span-2 border-l border-t border-[color:var(--rule)] p-4 text-sm leading-6 text-[var(--ink2)] sm:col-span-1 sm:border-t-0 sm:p-6">{copy}</p>
+                <span className="mono hidden items-end p-6 text-[0.58rem] text-[var(--cobalt)] sm:flex">{signal}</span>
               </Reveal>
             ))}
           </div>
         </section>
 
-        <section className="border-b border-black/20">
+        <section className="border-b border-[color:var(--rule)]">
           <div className="grid lg:grid-cols-12">
-            <div className="border-b border-black/20 p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-              <p className="eyebrow text-[#77756F]">State and observation / 006</p>
+            <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
+              <p className="eyebrow text-[var(--ink3)]">State and observation / 006</p>
             </div>
             <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
               <Reveal>
-                <h2 className="text-[clamp(3.2rem,6.7vw,7.8rem)] font-[520] leading-[0.84] tracking-[-0.075em]">
-                  State is what is true.<br />
-                  <span className="text-[#FF4B1F]">Observation is what an agent sees.</span>
+                <h2 className="text-[clamp(2.4rem,5.8vw,5.8rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
+                  The world stays complete. The agent gets the slice it needs.
                 </h2>
               </Reveal>
             </div>
           </div>
 
-          <div className="grid gap-px bg-black/20 md:grid-cols-3">
-            {observations.map((item, index) => (
-              <figure key={item.src} className="group bg-[#F2EFE6]">
-                <div className="relative aspect-[4/3] overflow-hidden bg-[#08090A]">
-                  <img src={item.src} alt={item.alt} width={1280} height={720} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]" />
-                  <div className="plate-grid pointer-events-none absolute inset-0" aria-hidden="true" />
-                  <div className="absolute left-3 top-3 bg-[#F2EFE6] px-2 py-1 mono text-[0.55rem] text-[#08090A]">STATE VIEW / 0{index + 1}</div>
+          <div className="grid gap-px bg-[var(--rule2)] md:grid-cols-3">
+            <ObservationPlate kind="orbit" index={1} />
+            <ObservationPlate kind="contact" index={2} />
+            <ObservationPlate kind="flow" index={3} />
+          </div>
+        </section>
+
+        <section id="use-cases" className="scroll-mt-28 border-b border-[color:var(--rule)]">
+          <div className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
+            <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
+              <p className="eyebrow text-[var(--ink3)]">Where it runs / 007</p>
+            </div>
+            <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
+              <h2 className="max-w-4xl text-[clamp(2.3rem,5vw,5.2rem)] font-[520] leading-[0.9] tracking-[-0.065em]">
+                Built for stacks that already have an agent and a world.
+              </h2>
+            </div>
+          </div>
+          <div className="grid gap-px bg-[var(--rule2)] sm:grid-cols-2 lg:grid-cols-4">
+            {useCases.map(([tag, title, copy], index) => (
+              <Reveal key={title} className="use-card flex min-h-60 flex-col justify-between bg-[var(--bg)] p-5 sm:p-7">
+                <div className="flex items-center justify-between">
+                  <span className="eyebrow text-[var(--cobalt)]">{tag}</span>
+                  <span className="mono text-[0.55rem] text-[var(--ink3)]">0{index + 1}</span>
                 </div>
-                <figcaption className="grid grid-cols-[1fr_auto] border-t border-black/20 p-4">
-                  <span className="eyebrow text-[#77756F]">{item.index}</span>
-                  <span className="text-sm tracking-[-0.02em]">{item.title}</span>
-                </figcaption>
-              </figure>
+                <div>
+                  <p className="text-2xl leading-[1.05] tracking-[-0.04em]">{title}</p>
+                  <p className="mt-4 text-sm leading-6 text-[var(--ink2)]">{copy}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </section>
 
-        <section className="grid min-h-[78svh] lg:grid-cols-12">
-          <div className="flex flex-col justify-between border-b border-black/20 p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[#77756F]">Public beta / demo access</p>
-            <p className="mono mt-16 max-w-xs text-[0.62rem] leading-5 text-[#77756F]">
-              FOR TEAMS BUILDING AGENTS,<br />ROBOTICS, WORLD MODELS,<br />AND SIMULATION INFRASTRUCTURE
+        <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
+          <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
+            <p className="eyebrow text-[var(--ink3)]">Questions / 008</p>
+            <h2 className="mt-12 max-w-xs text-[clamp(2rem,3.8vw,3.4rem)] leading-[0.92] tracking-[-0.055em]">
+              The usual ones.
+            </h2>
+          </div>
+          <div className="faq lg:col-span-8">
+            {faqs.map(([q, a]) => (
+              <details key={q} className="group">
+                <summary className="flex items-center justify-between gap-6 p-5 sm:p-7">
+                  <span className="max-w-2xl text-lg tracking-[-0.03em] sm:text-xl">{q}</span>
+                  <Plus className="faq__sign size-5 shrink-0 text-[var(--cobalt)]" aria-hidden="true" />
+                </summary>
+                <p className="max-w-2xl px-5 pb-7 text-sm leading-6 text-[var(--ink2)] sm:px-7">{a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid min-h-[68svh] lg:grid-cols-12">
+          <div className="flex flex-col justify-between border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
+            <p className="eyebrow text-[var(--ink3)]">Public beta / demo access</p>
+            <p className="mono mt-12 max-w-xs text-[0.62rem] leading-5 text-[var(--ink3)]">
+              FOR TEAMS WITH AN AGENT,<br />
+              A BACKEND, AND A WORLD<br />
+              THEY ALREADY RUN
             </p>
           </div>
           <div className="flex flex-col justify-between p-5 sm:p-8 lg:col-span-8 lg:p-12">
             <Reveal>
-              <h2 className="max-w-6xl text-[clamp(3.7rem,7.8vw,9.2rem)] font-[510] leading-[0.8] tracking-[-0.08em]">
-                Bring your agent.<br />Bring your simulator.<br />
-                <span className="text-[#2455FF]">Make the world executable.</span>
+              <h2 className="max-w-5xl text-[clamp(2.8rem,6.8vw,7.4rem)] font-[510] leading-[0.84] tracking-[-0.075em]">
+                Bring your stack.<br />
+                <span className="text-[var(--cobalt)]">Run it against a world that stays put.</span>
               </h2>
             </Reveal>
-            <div className="mt-16 grid gap-px bg-black/20 sm:grid-cols-[1fr_auto]">
-              <a href={demoHref} {...demoLinkProps} className="flex min-h-28 items-center justify-between bg-[#FF4B1F] p-5 text-xl font-[620] tracking-[-0.035em] transition-colors hover:bg-[#08090A] hover:text-white sm:p-7">
+            <div className="mt-14 grid gap-px bg-[var(--rule2)] sm:grid-cols-[1fr_auto]">
+              <a href={demoHref} {...demoLinkProps} className="flex min-h-24 items-center justify-between bg-[var(--vermilion)] p-5 text-xl font-[620] tracking-[-0.035em] text-white transition-colors hover:bg-[var(--ink)] hover:text-[var(--bg)] sm:min-h-28 sm:p-7">
                 Book a technical demo <ArrowUpRight className="size-6" aria-hidden="true" />
               </a>
-              <a href={`mailto:${siteConfig.email}`} className="eyebrow flex min-h-20 items-center bg-[#F2EFE6] px-5 transition-colors hover:bg-white sm:min-w-64 sm:px-7">{siteConfig.email}</a>
+              <a href={`mailto:${siteConfig.email}`} className="eyebrow flex min-h-16 items-center bg-[var(--bg)] px-5 transition-colors hover:bg-[var(--bg2)] sm:min-h-20 sm:min-w-64 sm:px-7">
+                {siteConfig.email}
+              </a>
             </div>
           </div>
         </section>

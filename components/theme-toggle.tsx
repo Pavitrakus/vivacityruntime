@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 
 export function ThemeToggle() {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(true);
 
   useEffect(() => {
     setDark(document.documentElement.classList.contains('dark'));
@@ -22,7 +22,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="theme-toggle flex size-9 items-center justify-center border border-current transition-colors hover:bg-[#2455FF] hover:text-white"
+      className="theme-toggle flex size-9 items-center justify-center border border-current transition-colors hover:bg-[var(--cobalt)] hover:text-white hover:border-[var(--cobalt)]"
       aria-label={dark ? 'Use light theme' : 'Use dark theme'}
       title={dark ? 'Use light theme' : 'Use dark theme'}
     >

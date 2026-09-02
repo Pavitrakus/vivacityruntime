@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: '%s | Vivacity',
   },
   description:
-    'Vivacity gives AI agents persistent world state, explicit actions, branchable execution, and verifiable outcomes across simulation backends.',
+    'Persistent world state, isolated forks, and verified transitions for AI agents — across exact solvers, physics engines, and learned models.',
   openGraph: {
     type: 'website',
     title: 'Vivacity | Executable simulation runtime for AI agents',
@@ -31,11 +31,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('vivacity-theme');var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light'}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('vivacity-theme');var d=t?t==='dark':true;document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light'}catch(e){}})()`,
           }}
         />
       </head>

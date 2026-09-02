@@ -102,7 +102,7 @@ export function RuntimeInstrument() {
   return (
     <section
       ref={rootRef}
-      className="runtime-frame relative flex min-h-[640px] flex-col overflow-hidden bg-[#08090A] text-[#F2EFE6]"
+      className="runtime-frame relative flex min-h-[520px] flex-col overflow-hidden bg-[#050506] text-[#F2EFE6] lg:min-h-[620px]"
       aria-label="Conceptual Vivacity runtime demonstration"
     >
       <div className="grid grid-cols-[1fr_auto] border-b border-white/20">

@@ -13,7 +13,7 @@ export function Mark({ inverse = false }: { inverse?: boolean }) {
 
 export function Brand({ inverse = false }: { inverse?: boolean }) {
   return (
-    <Link href="/" className="inline-flex items-center gap-2.5" aria-label="Vivacity home">
+    <Link href="/" className="inline-flex items-center gap-2.5 transition-opacity hover:opacity-70" aria-label="Vivacity home">
       <Mark inverse={inverse} />
       <span className="text-[0.75rem] font-[720] tracking-[0.24em]">VIVACITY</span>
     </Link>
