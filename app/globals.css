@@ -280,7 +280,7 @@ button:focus-visible {
 }
 
 .product-frame .runtime-frame {
-  min-height: 620px;
+  min-height: 680px;
   box-shadow: none;
 }
 
@@ -467,8 +467,8 @@ button:focus-visible {
 }
 
 .cta-primary:hover {
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--vermilion);
+  color: #fff;
 }
 
 .cta-secondary {
@@ -496,6 +496,10 @@ button:focus-visible {
   letter-spacing: -0.16em;
   color: rgba(255, 255, 255, 0.13);
   pointer-events: none;
+}
+
+.contract-rail > li:nth-child(3) {
+  background: rgba(255, 75, 31, 0.14);
 }
 
 .contract-rail > li:nth-child(6) {
@@ -601,13 +605,13 @@ button:focus-visible {
 /* ---------- Mobile ---------- */
 @media (max-width: 767px) {
   .site-shell { border-inline: 0; }
-  .runtime-frame { box-shadow: 8px 8px 0 var(--cobalt); }
+  .runtime-frame { box-shadow: 8px 8px 0 var(--cobalt); min-height: 680px; }
   .dark .runtime-frame { box-shadow: 8px 8px 0 var(--vermilion); }
   .product-frame { box-shadow: 8px 8px 0 var(--cobalt); }
+  .product-frame .runtime-frame { min-height: 720px; }
   .dark .product-frame { box-shadow: 8px 8px 0 var(--vermilion); }
   .system-boundary > article { min-height: auto; }
   .field-lines { background-image: none; }
-  .runtime-frame { min-height: 0; }
   .announce { padding-inline: 1.25rem; }
   .announce .eyebrow { font-size: 0.6rem; letter-spacing: 0.08em; }
 

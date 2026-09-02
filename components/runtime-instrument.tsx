@@ -102,7 +102,7 @@ export function RuntimeInstrument() {
   return (
     <section
       ref={rootRef}
-      className="runtime-frame relative flex min-h-[520px] flex-col overflow-hidden bg-[#050506] text-[#F2EFE6] lg:min-h-[620px]"
+      className="runtime-frame relative flex min-h-[680px] flex-col overflow-hidden bg-[#050506] text-[#F2EFE6] sm:min-h-[720px] lg:min-h-[640px]"
       aria-label="Conceptual Vivacity runtime demonstration"
     >
       <div className="grid grid-cols-[1fr_auto] border-b border-white/20">
@@ -115,11 +115,11 @@ export function RuntimeInstrument() {
         </div>
       </div>
 
-      <div className="hidden grid-cols-8 border-b border-white/20 md:grid">
+      <div className="grid grid-cols-4 border-b border-white/20 md:grid-cols-8">
         {stages.map((stage, index) => (
-          <div key={stage} className={`border-r border-white/15 px-3 py-3 last:border-r-0 ${index === 5 ? 'bg-[#2455FF]' : ''}`}>
-            <span className="mono block text-[0.55rem] text-white/35">0{index + 1}</span>
-            <span className="mono mt-1 block text-[0.6rem] uppercase tracking-[0.08em]">{stage}</span>
+          <div key={stage} className={`border-r border-b border-white/15 px-2 py-2.5 last:border-r-0 md:border-b-0 md:px-3 md:py-3 ${index === 5 ? 'bg-[#2455FF]' : ''}`}>
+            <span className="mono block text-[0.52rem] text-white/35 md:text-[0.55rem]">0{index + 1}</span>
+            <span className="mono mt-1 block text-[0.55rem] uppercase tracking-[0.08em] md:text-[0.6rem]">{stage}</span>
           </div>
         ))}
       </div>
@@ -165,7 +165,7 @@ export function RuntimeInstrument() {
           </div>
         </div>
 
-        <div className="relative min-h-[340px] overflow-hidden lg:min-h-0">
+        <div className="relative min-h-[380px] overflow-hidden sm:min-h-[420px] lg:min-h-0">
           <div className="instrument-grid absolute inset-0" aria-hidden="true" />
           <div className="absolute left-4 top-4 z-10 flex items-center gap-2 border border-white/20 bg-[#08090A] px-3 py-2">
             <span className="mono text-[0.58rem] uppercase text-white/40">Transition</span>

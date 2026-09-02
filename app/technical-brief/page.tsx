@@ -121,7 +121,7 @@ export default function TechnicalBrief() {
           <div className="lg:col-span-8">
             <div className="p-5 sm:p-8 lg:p-12">
               <h2 className="max-w-5xl text-[clamp(3rem,6.2vw,7rem)] font-[520] leading-[0.85] tracking-[-0.075em]">
-                One contract from inspect to commit.
+                One contract from inspect <span className="text-[var(--vermilion)]">to commit.</span>
               </h2>
               <p className="mt-8 max-w-3xl text-lg leading-7 text-[var(--ink2)]">
                 An agent should be able to inspect, act, fork, execute, and evaluate a world through one coherent contract. The executor may change. The meaning of the world should not.

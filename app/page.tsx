@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import { CodeTrace } from '@/components/code-trace';
-import { HeroConsole } from '@/components/hero-console';
 import { ObservationPlate } from '@/components/observation-plate';
 import { RuntimeInstrument } from '@/components/runtime-instrument';
 import { Reveal } from '@/components/reveal';
@@ -95,11 +94,12 @@ export default function Home() {
                 <p className="mono text-[0.58rem] uppercase tracking-[0.1em] text-[var(--ink3)]">SYSTEM / 001</p>
               </div>
 
-              <h1 className="mt-7 max-w-[16ch] text-[clamp(2.7rem,9vw,5.8rem)] font-[560] leading-[0.86] tracking-[-0.075em] sm:mt-9">
-                A world your agents can act in.
+              <h1 className="mt-7 max-w-[22ch] text-[clamp(2.4rem,7.6vw,5.2rem)] font-[560] leading-[0.86] tracking-[-0.075em] sm:mt-9">
+                Executable simulation runtime for <span className="text-[var(--vermilion)]">AI agents.</span>
               </h1>
-              <p className="mt-6 max-w-[36rem] text-[clamp(1rem,2.4vw,1.2rem)] leading-[1.45] tracking-[-0.02em] text-[var(--ink2)] sm:mt-7">
-                Vivacity holds the world, isolates every fork, and routes each transition to the backend that can compute it. A result only becomes the next world if it verifies.
+              <span className="mt-6 block h-px w-14 bg-[var(--vermilion)]" aria-hidden="true" />
+              <p className="mt-6 max-w-[38rem] text-[clamp(1rem,2.4vw,1.2rem)] leading-[1.45] tracking-[-0.02em] text-[var(--ink2)] sm:mt-7">
+                Describe a world. Preserve its state. Let an agent act, branch, simulate, and verify what happens next through the right execution backend.
               </p>
 
               <div className="mt-8 grid grid-cols-1 gap-px bg-[var(--rule2)] sm:mt-10 sm:grid-cols-2">
@@ -113,10 +113,7 @@ export default function Home() {
             </div>
 
             <div className="border-b border-[color:var(--rule)] p-4 sm:p-6 lg:col-span-7 lg:border-b-0 lg:p-8">
-              <div className="min-h-[620px] sm:min-h-[680px] lg:hidden">
-                <HeroConsole />
-              </div>
-              <div className="product-frame hidden overflow-hidden lg:block">
+              <div className="product-frame overflow-hidden">
                 <RuntimeInstrument />
               </div>
             </div>
@@ -147,7 +144,8 @@ export default function Home() {
             </div>
             <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
               <h2 className="max-w-4xl text-[clamp(2.3rem,5.4vw,5.4rem)] font-[520] leading-[0.9] tracking-[-0.07em]">
-                Your planner proposes. Your backend computes. Vivacity keeps the world they share.
+                Your planner proposes. Your backend computes.{' '}
+                <span className="text-[var(--vermilion)]">Vivacity keeps the world they share.</span>
               </h2>
             </div>
           </div>
@@ -178,7 +176,8 @@ export default function Home() {
             </div>
             <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
               <h2 className="max-w-5xl text-[clamp(2.4rem,5.6vw,6rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
-                Three sides. One world.
+                The layer between<br />
+                <span className="text-[var(--vermilion)]">intent and consequence.</span>
               </h2>
             </div>
           </div>
@@ -229,7 +228,7 @@ export default function Home() {
             </div>
             <Reveal className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
               <h2 className="max-w-5xl text-[clamp(2.6rem,6.4vw,6.8rem)] font-[510] leading-[0.86] tracking-[-0.07em]">
-                Eight steps from a world spec to the next view.
+                A world that <span className="text-[var(--vermilion)]">continues.</span>
               </h2>
             </Reveal>
           </div>
@@ -273,7 +272,8 @@ export default function Home() {
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
             <p className="eyebrow mb-16 text-[var(--ink3)]">Execution routing / 005</p>
             <h2 className="max-w-md text-[clamp(2.4rem,5vw,5.2rem)] font-[520] leading-[0.88] tracking-[-0.065em]">
-              Same contract. The backend that fits.
+              Same contract.{' '}
+              <span className="text-[var(--vermilion)]">The backend that fits.</span>
             </h2>
             <p className="mt-7 max-w-sm text-sm leading-6 text-[var(--ink2)]">
               Vivacity picks an executor per transition, then writes the result back into the same world state.
@@ -299,7 +299,8 @@ export default function Home() {
             <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
               <Reveal>
                 <h2 className="text-[clamp(2.4rem,5.8vw,5.8rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
-                  The world stays complete. The agent gets the slice it needs.
+                  State is what is true.<br />
+                  <span className="text-[var(--vermilion)]">Observation is what an agent sees.</span>
                 </h2>
               </Reveal>
             </div>
@@ -371,8 +372,8 @@ export default function Home() {
           <div className="flex flex-col justify-between p-5 sm:p-8 lg:col-span-8 lg:p-12">
             <Reveal>
               <h2 className="max-w-5xl text-[clamp(2.8rem,6.8vw,7.4rem)] font-[510] leading-[0.84] tracking-[-0.075em]">
-                Bring your stack.<br />
-                <span className="text-[var(--cobalt)]">Run it against a world that stays put.</span>
+                Bring your intelligence.<br />
+                <span className="text-[var(--vermilion)]">Bring your execution.</span>
               </h2>
             </Reveal>
             <div className="mt-14 grid gap-px bg-[var(--rule2)] sm:grid-cols-[1fr_auto]">
