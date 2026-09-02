@@ -31,6 +31,15 @@
   --radius: 0;
 }
 
+.dark {
+  --bone: #0b0c0e;
+  --carbon: #f2efe6;
+  --graphite: #aaa79e;
+  --rule: rgba(242, 239, 230, 0.2);
+  --background: var(--bone);
+  --foreground: var(--carbon);
+}
+
 * {
   box-sizing: border-box;
   border-radius: 0 !important;
@@ -191,6 +200,52 @@ button:focus-visible {
   background-size: 28px 100%;
 }
 
+.dark body,
+.dark main,
+.dark [class~="bg-[#F2EFE6]"] {
+  background-color: #0b0c0e !important;
+  color: #f2efe6;
+}
+
+.dark [class~="text-[#08090A]"] {
+  color: #f2efe6 !important;
+}
+
+.dark [class~="text-[#4f4e49]"] {
+  color: #bbb8ae !important;
+}
+
+.dark [class~="text-[#77756F]"] {
+  color: #aaa79e !important;
+}
+
+.dark [class~="border-black/20"] {
+  border-color: rgba(242, 239, 230, 0.2) !important;
+}
+
+.dark [class~="bg-black/20"] {
+  background-color: rgba(242, 239, 230, 0.2) !important;
+}
+
+.dark [class~="hover:bg-white"]:hover,
+.dark .route-row:hover,
+.dark .layer-row:hover {
+  background-color: #15171a !important;
+}
+
+.dark .hero-grid,
+.dark .brief-hero {
+  background-image: linear-gradient(90deg, transparent calc(25% - 0.5px), rgba(242, 239, 230, 0.07) 25%, transparent calc(25% + 0.5px));
+}
+
+.dark .runtime-frame {
+  box-shadow: 14px 14px 0 #ff4b1f;
+}
+
+.dark .theme-toggle:hover {
+  border-color: #2455ff;
+}
+
 [data-reveal] {
   opacity: 1;
   transform: none;
@@ -221,4 +276,46 @@ button:focus-visible {
   .system-boundary > article { min-height: 330px; }
   .hero-grid,
   .brief-hero { background-image: none; }
+
+  .contract-rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(230px, 72vw);
+    grid-template-columns: none;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: thin;
+  }
+
+  .contract-rail > li {
+    min-height: 260px;
+    scroll-snap-align: start;
+    border-bottom: 0;
+  }
+
+  .system-boundary > article {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .system-boundary > article:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 1.25rem;
+    bottom: -1px;
+    width: 2.25rem;
+    height: 1px;
+    background: #ff4b1f;
+    box-shadow: 0 -5px 0 #ff4b1f, 0 -10px 0 #ff4b1f;
+  }
+
+  .route-row:nth-child(even) h3,
+  .layer-row:nth-child(even) h3 {
+    color: #2455ff;
+  }
+
+  .dark .runtime-frame { box-shadow: 8px 8px 0 #ff4b1f; }
+  .dark .hero-grid,
+  .dark .brief-hero { background-image: none; }
 }

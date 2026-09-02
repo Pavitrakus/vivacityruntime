@@ -2,10 +2,11 @@ import Link from 'next/link';
 
 export function Mark({ inverse = false }: { inverse?: boolean }) {
   return (
-    <svg aria-hidden="true" viewBox="0 0 36 36" className="size-8 shrink-0">
-      <path d="M2 4h7l9 22v7h-5z" fill={inverse ? '#F2EFE6' : '#08090A'} />
-      <path d="M27 4h7L23 33h-5v-7z" fill={inverse ? '#F2EFE6' : '#08090A'} />
-      <rect x="15" y="23" width="7" height="7" fill="#2455FF" />
+    <svg aria-hidden="true" viewBox="0 0 40 40" className="size-9 shrink-0">
+      <rect width="40" height="40" fill={inverse ? '#F2EFE6' : '#08090A'} />
+      <path d="M6 6 17 17M34 6 23 17M20 23v12" fill="none" stroke={inverse ? '#08090A' : '#F2EFE6'} strokeWidth="2.4" strokeLinecap="square" />
+      <rect x="17" y="17" width="6" height="6" fill="#2455FF" />
+      <rect x="32" y="4" width="3" height="3" fill="#FF4B1F" />
     </svg>
   );
 }

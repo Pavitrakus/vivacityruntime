@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { Brand } from '@/components/brand';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { demoHref, demoLinkProps } from '@/lib/site-config';
 
 export function SiteHeader({ inverse = false }: { inverse?: boolean }) {
@@ -11,10 +12,11 @@ export function SiteHeader({ inverse = false }: { inverse?: boolean }) {
       }`}
     >
       <Brand inverse={inverse} />
-      <nav className="flex items-center gap-5" aria-label="Primary navigation">
+      <nav className="flex items-center gap-2 sm:gap-5" aria-label="Primary navigation">
         <Link href="/technical-brief" className="eyebrow hidden transition-colors hover:text-[#2455FF] sm:block">
           Technical brief
         </Link>
+        <ThemeToggle />
         <a
           href={demoHref}
           {...demoLinkProps}
