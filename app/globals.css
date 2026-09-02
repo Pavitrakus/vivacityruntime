@@ -280,7 +280,7 @@ button:focus-visible {
 }
 
 .product-frame .runtime-frame {
-  min-height: 680px;
+  min-height: 620px;
   box-shadow: none;
 }
 
@@ -605,13 +605,13 @@ button:focus-visible {
 /* ---------- Mobile ---------- */
 @media (max-width: 767px) {
   .site-shell { border-inline: 0; }
-  .runtime-frame { box-shadow: 8px 8px 0 var(--cobalt); min-height: 680px; }
+  .runtime-frame { box-shadow: 8px 8px 0 var(--cobalt); }
   .dark .runtime-frame { box-shadow: 8px 8px 0 var(--vermilion); }
   .product-frame { box-shadow: 8px 8px 0 var(--cobalt); }
-  .product-frame .runtime-frame { min-height: 720px; }
   .dark .product-frame { box-shadow: 8px 8px 0 var(--vermilion); }
   .system-boundary > article { min-height: auto; }
   .field-lines { background-image: none; }
+  .runtime-frame { min-height: 0; }
   .announce { padding-inline: 1.25rem; }
   .announce .eyebrow { font-size: 0.6rem; letter-spacing: 0.08em; }
 

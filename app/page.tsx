@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import { CodeTrace } from '@/components/code-trace';
+import { HeroConsole } from '@/components/hero-console';
 import { ObservationPlate } from '@/components/observation-plate';
 import { RuntimeInstrument } from '@/components/runtime-instrument';
 import { Reveal } from '@/components/reveal';
@@ -113,7 +114,10 @@ export default function Home() {
             </div>
 
             <div className="border-b border-[color:var(--rule)] p-4 sm:p-6 lg:col-span-7 lg:border-b-0 lg:p-8">
-              <div className="product-frame overflow-hidden">
+              <div className="min-h-[620px] sm:min-h-[680px] lg:hidden">
+                <HeroConsole />
+              </div>
+              <div className="product-frame hidden overflow-hidden lg:block">
                 <RuntimeInstrument />
               </div>
             </div>
@@ -143,9 +147,8 @@ export default function Home() {
               <p className="eyebrow text-[var(--ink3)]">How it runs / 002</p>
             </div>
             <div className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
-              <h2 className="max-w-4xl text-[clamp(2.3rem,5.4vw,5.4rem)] font-[520] leading-[0.9] tracking-[-0.07em]">
-                Your planner proposes. Your backend computes.{' '}
-                <span className="text-[var(--vermilion)]">Vivacity keeps the world they share.</span>
+              <h2 className="max-w-4xl text-[clamp(2.3rem,5.4vw,5.4rem)] font-[520] leading-[0.9] tracking-[-0.07em] text-[var(--cobalt)]">
+                Your planner proposes. Your backend computes. Vivacity keeps the world they share.
               </h2>
             </div>
           </div>
@@ -228,7 +231,7 @@ export default function Home() {
             </div>
             <Reveal className="p-5 sm:p-8 lg:col-span-8 lg:p-12">
               <h2 className="max-w-5xl text-[clamp(2.6rem,6.4vw,6.8rem)] font-[510] leading-[0.86] tracking-[-0.07em]">
-                A world that <span className="text-[var(--vermilion)]">continues.</span>
+                Eight steps from a world spec to the <span className="text-[var(--cobalt)]">next view.</span>
               </h2>
             </Reveal>
           </div>
@@ -273,7 +276,7 @@ export default function Home() {
             <p className="eyebrow mb-16 text-[var(--ink3)]">Execution routing / 005</p>
             <h2 className="max-w-md text-[clamp(2.4rem,5vw,5.2rem)] font-[520] leading-[0.88] tracking-[-0.065em]">
               Same contract.{' '}
-              <span className="text-[var(--vermilion)]">The backend that fits.</span>
+              <span className="text-[var(--cobalt)]">The backend that fits.</span>
             </h2>
             <p className="mt-7 max-w-sm text-sm leading-6 text-[var(--ink2)]">
               Vivacity picks an executor per transition, then writes the result back into the same world state.
@@ -373,7 +376,7 @@ export default function Home() {
             <Reveal>
               <h2 className="max-w-5xl text-[clamp(2.8rem,6.8vw,7.4rem)] font-[510] leading-[0.84] tracking-[-0.075em]">
                 Bring your intelligence.<br />
-                <span className="text-[var(--vermilion)]">Bring your execution.</span>
+                <span className="text-[var(--cobalt)]">Bring your execution.</span>
               </h2>
             </Reveal>
             <div className="mt-14 grid gap-px bg-[var(--rule2)] sm:grid-cols-[1fr_auto]">
