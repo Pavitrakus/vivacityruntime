@@ -18,13 +18,19 @@ export function LoadingIntro() {
   return (
     <div className="loading-intro" data-leaving={leaving} aria-hidden="true">
       <div className="intro-grid" />
-      <svg viewBox="0 0 64 64" className="intro-mark">
-        <path d="M8 9L32 33L56 9M32 33V57" fill="none" stroke="currentColor" strokeWidth="4" />
-        <path d="M17 9L32 24L47 9" fill="none" stroke="currentColor" strokeWidth="2" opacity=".35" />
-        <rect x="27" y="28" width="10" height="10" fill="currentColor" />
-      </svg>
-      <div className="intro-word">VIVACITY</div>
-      <div className="intro-scan" />
+      <div className="intro-axis intro-axis-x" />
+      <div className="intro-axis intro-axis-y" />
+      <div className="intro-lockup">
+        <svg viewBox="0 0 64 64" className="intro-mark">
+          <path className="intro-rail intro-rail-a" d="M7 8L32 33L57 8" fill="none" stroke="currentColor" strokeWidth="3.25" />
+          <path className="intro-rail intro-rail-b" d="M16 8L32 24L48 8" fill="none" stroke="currentColor" strokeWidth="1.5" />
+          <path className="intro-stem" d="M32 33V58" fill="none" stroke="currentColor" strokeWidth="3.25" />
+          <rect className="intro-node" x="27" y="28" width="10" height="10" fill="currentColor" />
+        </svg>
+        <div className="intro-word">VIVACITY</div>
+        <div className="intro-state">EXECUTION STATE / READY</div>
+      </div>
+      <div className="intro-aperture" />
     </div>
   );
 }
