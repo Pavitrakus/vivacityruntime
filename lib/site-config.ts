@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: 'Vivacity',
-  status: 'Now in public beta',
+  status: 'Research in progress',
   email: 'help@tryvivacity.com',
   bookingUrl: '' as string,
 };

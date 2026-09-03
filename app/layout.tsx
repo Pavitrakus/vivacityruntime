@@ -9,23 +9,23 @@ const display = Instrument_Serif({ weight: '400', subsets: ['latin'], variable: 
 export const metadata: Metadata = {
   metadataBase: new URL('https://vivacityruntime.vercel.app'),
   title: {
-    default: 'Vivacity | Executable simulation runtime for AI agents',
+    default: 'Vivacity | Intelligence that can act in the world',
     template: '%s | Vivacity',
   },
   description:
-    'Describe a world. Preserve its state. Let an agent act, branch, simulate, and verify what happens next through the right execution backend.',
+    'Vivacity is building research and infrastructure for agents that act in changing environments.',
   openGraph: {
     type: 'website',
-    title: 'Vivacity | Executable simulation runtime for AI agents',
+    title: 'Vivacity | Intelligence that can act in the world',
     description:
-      'Describe a world. Preserve its state. Let an agent act, branch, simulate, and verify what happens next through the right execution backend.',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Vivacity. Executable simulation runtime for AI agents.' }],
+      'Vivacity is building research and infrastructure for agents that act in changing environments.',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Vivacity research.' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Vivacity | Executable simulation runtime for AI agents',
+    title: 'Vivacity | Intelligence that can act in the world',
     description:
-      'Describe a world. Preserve its state. Let an agent act, branch, simulate, and verify what happens next through the right execution backend.',
+      'Vivacity is building research and infrastructure for agents that act in changing environments.',
     images: ['/og.png'],
   },
 };
