@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { OpticalField } from '@/components/optical-field';
+import { FluidImage } from '@/components/fluid-image';
+import { RuntimeInstrument } from '@/components/runtime-instrument';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { demoHref, demoLinkProps, siteConfig } from '@/lib/site-config';
@@ -18,7 +20,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-grid">
           <div className="hero-copy">
-            <div className="status-line"><span /> RESEARCH IN PROGRESS</div>
+            <div className="status-line"><span /> PRIVATE TECHNICAL ACCESS</div>
             <h1>Intelligence that can <em>act</em> in the world.</h1>
             <p>Vivacity is building infrastructure for agents that need more than an answer. They need to understand changing conditions, take action, and stay grounded in what happens next.</p>
             <div className="hero-actions">
@@ -40,7 +42,7 @@ export default function Home() {
         <div className="research-intro">
           <p className="section-index">02 / ACTIVE RESEARCH</p>
           <h2>Building for the space between intent and consequence.</h2>
-          <p>Our work focuses on the systems an agent needs to reason about an environment, make a choice, and learn from the result. Research is ongoing. We will publish more as the work matures.</p>
+          <p>Our work focuses on the systems an agent needs to reason about an environment, make a choice, and learn from the result. We publish when the work is ready to be useful.</p>
           <Link href="/research" className="text-link">Research index <span>↗</span></Link>
         </div>
         <div className="research-list">
@@ -62,9 +64,44 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="instrument-section">
+        <div className="instrument-copy">
+          <p className="section-index">03 / CONCEPTUAL INSTRUMENT</p>
+          <h2>See the transition, not just the answer.</h2>
+          <p>An agent proposes an action. Vivacity keeps the state, isolates possible outcomes, and preserves the evidence behind the path that follows. This instrument is conceptual, but the system boundary is the point.</p>
+          <Link href="/docs" className="text-link">Read the working concepts <span>↗</span></Link>
+        </div>
+        <div className="instrument-host"><RuntimeInstrument /></div>
+      </section>
+
+      <section className="state-atlas">
+        <div className="atlas-heading">
+          <p className="section-index">04 / EXECUTABLE WORLDS</p>
+          <h2>Between a world model and the world it is asked to predict.</h2>
+          <p>Vivacity is designed around a hard boundary: state records what is true, action proposes a transition, and execution determines what can become true next.</p>
+        </div>
+        <div className="atlas-grid">
+          <article>
+            <FluidImage src="/plate-orbit.webp" alt="A sampled orbital observation with three candidate trajectories" />
+            <div><span>STATE VIEW / 01</span><h3>Orbital state</h3></div>
+          </article>
+          <article>
+            <FluidImage src="/plate-contact.webp" alt="A sampled contact field around a robotic gripper" />
+            <div><span>STATE VIEW / 02</span><h3>Contact action</h3></div>
+          </article>
+          <article>
+            <FluidImage src="/plate-fluid.webp" alt="A sampled flow field around an asymmetric obstacle" />
+            <div><span>STATE VIEW / 03</span><h3>Flow state</h3></div>
+          </article>
+        </div>
+        <div className="atlas-terms" aria-label="Technical concepts">
+          {['STATE SPACE','TRANSITION DYNAMICS','OBSERVATION OPERATOR','CONSTRAINT MANIFOLD','CAUSAL TRACE','EXECUTION POLICY'].map((term,index)=><span key={term}>0{index+1} / {term}</span>)}
+        </div>
+      </section>
+
       <section className="partners-section">
         <div>
-          <p className="section-index">03 / SELECT PARTNERS</p>
+          <p className="section-index">05 / SELECT PARTNERS</p>
           <h2>Working closely with a small number of ambitious technical teams.</h2>
         </div>
         <div className="partners-copy">

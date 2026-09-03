@@ -8,8 +8,7 @@ export function Mark({ inverse = false }: { inverse?: boolean }) {
       <path d="M4 5L18 19L32 5" fill="none" stroke={ink} strokeWidth="2.2" />
       <path d="M18 19V32" fill="none" stroke={ink} strokeWidth="2.2" />
       <path d="M9 5L18 14L27 5" fill="none" stroke={ink} strokeWidth="1" opacity=".38" />
-      <rect x="15.3" y="16.3" width="5.4" height="5.4" fill="#2455FF" />
-      <rect x="29.5" y="2.5" width="3.8" height="3.8" fill="#FF4B1F" />
+      <rect x="15.3" y="16.3" width="5.4" height="5.4" fill={ink} />
     </svg>
   );
 }
