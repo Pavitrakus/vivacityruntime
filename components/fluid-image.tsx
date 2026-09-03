@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-export function FluidImage({ src, alt, className = '' }: { src: string; alt: string; className?: string }) {
+export function FluidImage({ src, alt, className = '', zoom = 1 }: { src: string; alt: string; className?: string; zoom?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hostRef = useRef<HTMLElement>(null);
   const pointer = useRef({ x: -1000, y: -1000, active: false });
@@ -40,8 +40,8 @@ export function FluidImage({ src, alt, className = '' }: { src: string; alt: str
       context.fillStyle = '#08090a';
       context.fillRect(0, 0, width, height);
       const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
-      const sourceW = width / scale;
-      const sourceH = height / scale;
+      const sourceW = width / scale / zoom;
+      const sourceH = height / scale / zoom;
       const sourceX = (image.naturalWidth - sourceW) / 2;
       const sourceY = (image.naturalHeight - sourceH) / 2;
       const cell = width < 700 ? 10 : 13;
@@ -58,7 +58,7 @@ export function FluidImage({ src, alt, className = '' }: { src: string; alt: str
             ox = (dx / distance) * force * 26;
             oy = (dy / distance) * force * 26;
           }
-          context.drawImage(image, sourceX + x / scale, sourceY + y / scale, cell / scale, cell / scale, x + ox, y + oy, cell + .7, cell + .7);
+          context.drawImage(image, sourceX + x / scale / zoom, sourceY + y / scale / zoom, cell / scale / zoom, cell / scale / zoom, x + ox, y + oy, cell + .7, cell + .7);
         }
       }
     };
@@ -71,7 +71,7 @@ export function FluidImage({ src, alt, className = '' }: { src: string; alt: str
     image.onload = () => { if (started) return; started = true; resize(); loop(); };
     if (image.complete) image.onload?.(new Event('load'));
     return () => { running = false; observer.disconnect(); visibilityObserver.disconnect(); window.cancelAnimationFrame(frame); };
-  }, [src]);
+  }, [src, zoom]);
 
   return (
     <figure ref={hostRef} className={'fluid-image ' + className}

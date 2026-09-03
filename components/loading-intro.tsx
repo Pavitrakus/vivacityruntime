@@ -7,11 +7,10 @@ export function LoadingIntro() {
   const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.sessionStorage.getItem('vivacity-intro')) return;
-    window.sessionStorage.setItem('vivacity-intro', 'seen');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const show = window.requestAnimationFrame(() => setVisible(true));
-    const leave = window.setTimeout(() => setLeaving(true), 2100);
-    const done = window.setTimeout(() => setVisible(false), 2850);
+    const leave = window.setTimeout(() => setLeaving(true), 3200);
+    const done = window.setTimeout(() => setVisible(false), 4400);
     return () => { window.cancelAnimationFrame(show); window.clearTimeout(leave); window.clearTimeout(done); };
   }, []);
 

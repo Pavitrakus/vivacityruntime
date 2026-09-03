@@ -147,8 +147,8 @@ export function RuntimeInstrument() {
         ))}
       </div>
 
-      <div className="grid flex-1 lg:grid-cols-[180px_1fr_156px]">
-        <div className="order-2 border-t border-white/20 p-4 lg:order-1 lg:border-r lg:border-t-0">
+      <div className="runtime-body grid flex-1">
+        <div className="runtime-state order-2 border-t border-white/20 p-4 lg:border-l lg:border-r lg:border-t-0">
           <p className="eyebrow text-white/35">WorldState</p>
           <p className="mono mt-2 text-[0.58rem] text-[#2455FF]">{current.revision}</p>
           <dl className="mt-6 grid grid-cols-2 gap-4 lg:block lg:space-y-4">
@@ -165,11 +165,11 @@ export function RuntimeInstrument() {
           </div>
         </div>
 
-        <div className="relative min-h-[380px] overflow-hidden sm:min-h-[420px] lg:min-h-0">
+        <div className="runtime-sim relative min-h-[380px] overflow-hidden sm:min-h-[420px] lg:min-h-0">
           <div className="instrument-grid absolute inset-0" aria-hidden="true" />
-          <div className="absolute left-4 top-4 z-10 flex items-center gap-2 border border-white/20 bg-[#08090A] px-3 py-2">
-            <span className="mono text-[0.58rem] uppercase text-white/40">Transition</span>
-            <span className="mono text-[0.62rem]">a:IMPULSE_04</span>
+          <div className="transition-label absolute left-4 top-4 z-10 flex items-center gap-3 border border-white/20 bg-[#08090A] px-4 py-3">
+            <span className="mono uppercase text-white/40">Transition</span>
+            <span className="mono">a:IMPULSE_04</span>
           </div>
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 600 300" preserveAspectRatio="none" aria-hidden="true">
             {current.branchPaths.map((path, index) => (
@@ -198,7 +198,7 @@ export function RuntimeInstrument() {
           </div>
         </div>
 
-        <div className="order-3 hidden border-l border-white/20 lg:block">
+        <div className="runtime-branches order-3 hidden lg:block">
           <p className="eyebrow border-b border-white/20 p-4 text-white/35">Branch set</p>
           {current.outcomes.map((outcome, index) => (
             <button
@@ -238,4 +238,3 @@ export function RuntimeInstrument() {
     </section>
   );
 }
-

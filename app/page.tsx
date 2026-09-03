@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { OpticalField } from '@/components/optical-field';
 import { FluidImage } from '@/components/fluid-image';
@@ -28,7 +29,14 @@ export default function Home() {
               <Link href="/research" className="text-link">Explore our research <span>↗</span></Link>
             </div>
           </div>
-          <OpticalField variant="a" label="An abstract cobalt and vermilion optical field with responsive scientific symbols" />
+          <figure className="hero-research-image">
+            <Image src="/plate-flow.png" alt="A sampled computational flow field around a physical boundary" fill priority sizes="(max-width: 900px) 100vw, 55vw" />
+            <div className="hero-image-grid" aria-hidden="true" />
+            <span className="hero-image-term term-a">∂W / ∂t</span>
+            <span className="hero-image-term term-b">HUMAN-DEFINED PHYSICS</span>
+            <span className="hero-image-term term-c">RUNTIME FOR NON-LIVING SYSTEMS</span>
+            <figcaption>FIELD OBSERVATION / 001</figcaption>
+          </figure>
         </div>
         <a href="#thesis" className="hero-scroll" aria-label="Continue to our thesis"><ArrowDown /> OUR THESIS</a>
       </section>
@@ -82,20 +90,17 @@ export default function Home() {
         </div>
         <div className="atlas-grid">
           <article>
-            <FluidImage src="/plate-orbit.webp" alt="A sampled orbital observation with three candidate trajectories" />
+            <FluidImage src="/plate-orbit.webp" alt="A sampled orbital observation with three candidate trajectories" zoom={1.12} />
             <div><span>STATE VIEW / 01</span><h3>Orbital state</h3></div>
           </article>
           <article>
-            <FluidImage src="/plate-contact.webp" alt="A sampled contact field around a robotic gripper" />
+            <FluidImage src="/plate-contact.webp" alt="A sampled contact field around a robotic gripper" zoom={1.2} />
             <div><span>STATE VIEW / 02</span><h3>Contact action</h3></div>
           </article>
           <article>
-            <FluidImage src="/plate-fluid.webp" alt="A sampled flow field around an asymmetric obstacle" />
+            <FluidImage src="/plate-fluid.webp" alt="A sampled flow field around an asymmetric obstacle" zoom={1.16} />
             <div><span>STATE VIEW / 03</span><h3>Flow state</h3></div>
           </article>
-        </div>
-        <div className="atlas-terms" aria-label="Technical concepts">
-          {['STATE SPACE','TRANSITION DYNAMICS','OBSERVATION OPERATOR','CONSTRAINT MANIFOLD','CAUSAL TRACE','EXECUTION POLICY'].map((term,index)=><span key={term}>0{index+1} / {term}</span>)}
         </div>
       </section>
 
