@@ -108,7 +108,7 @@ export function RuntimeInstrument() {
       <div className="grid grid-cols-[1fr_auto] border-b border-white/20">
         <div className="flex items-center gap-3 px-4 py-3">
           <span className="signal-square bg-[#FF4B1F]" aria-hidden="true" />
-          <span className="eyebrow text-white/60">Runtime / conceptual instrument</span>
+          <span className="eyebrow text-white/55">Runtime</span>
         </div>
         <div className="mono flex items-center gap-2 border-l border-white/20 px-4 text-[0.62rem] uppercase tracking-[0.1em] text-[#9EFF6A]">
           <span className="h-1.5 w-1.5 bg-current" aria-hidden="true" /> active
@@ -172,8 +172,6 @@ export function RuntimeInstrument() {
             <span className="mono text-[0.62rem]">a:IMPULSE_04</span>
           </div>
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 600 300" preserveAspectRatio="none" aria-hidden="true">
-            <line x1="32" y1="270" x2="570" y2="270" stroke="rgba(242,239,230,.18)" />
-            <line x1="32" y1="24" x2="32" y2="270" stroke="rgba(242,239,230,.18)" />
             {current.branchPaths.map((path, index) => (
               <path
                 key={path}

@@ -104,7 +104,7 @@ export default function TechnicalBrief() {
           <div className="flex flex-col justify-between p-5 sm:p-8 lg:col-span-8 lg:p-12">
             <div>
               <p className="eyebrow mb-7 text-[var(--ink3)]">Vivacity / technical system</p>
-              <h1 className="text-[clamp(4rem,10vw,11rem)] font-[520] leading-[0.76] tracking-[-0.085em]">
+              <h1 className="type-display text-[clamp(4rem,10vw,11rem)] leading-[0.82] tracking-[-0.045em]">
                 Architecture<br /><span className="text-[var(--cobalt)]">Brief 001.</span>
               </h1>
             </div>
@@ -116,7 +116,7 @@ export default function TechnicalBrief() {
 
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[var(--ink3)]">System intent / 001</p>
+            <p className="eyebrow text-[var(--ink3)]">System intent</p>
           </div>
           <div className="lg:col-span-8">
             <div className="p-5 sm:p-8 lg:p-12">
@@ -152,7 +152,7 @@ export default function TechnicalBrief() {
 
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[var(--ink3)]">Worked example / 001b</p>
+            <p className="eyebrow text-[var(--ink3)]">Worked example</p>
             <h2 className="mt-16 max-w-sm text-[clamp(2.2rem,4.2vw,3.8rem)] leading-[0.9] tracking-[-0.06em]">
               One parent. Three futures.
             </h2>
@@ -172,7 +172,7 @@ export default function TechnicalBrief() {
 
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[var(--ink3)]">Runtime responsibilities / 002</p>
+            <p className="eyebrow text-[var(--ink3)]">Runtime</p>
             <p className="mt-8 max-w-sm text-sm leading-6 text-[var(--ink2)]">
               These are architectural responsibilities, not final package names or public API guarantees.
             </p>
@@ -226,7 +226,7 @@ export default function TechnicalBrief() {
       <div className="site-shell">
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[var(--ink3)]">State invariants / 003</p>
+            <p className="eyebrow text-[var(--ink3)]">Invariants</p>
             <h2 className="mt-20 max-w-sm text-[clamp(2.8rem,5vw,5.5rem)] leading-[0.88] tracking-[-0.07em]">What must remain true.</h2>
             <p className="mt-6 max-w-sm text-sm leading-6 text-[var(--ink2)]">
               These are the properties a world keeps even when an executor fails, a view cannot be rendered, or a branch is dropped. If one of them breaks, commit is blocked.
@@ -245,7 +245,7 @@ export default function TechnicalBrief() {
 
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[var(--ink3)]">Execution paths / 004</p>
+            <p className="eyebrow text-[var(--ink3)]">Execution</p>
             <h2 className="mt-20 max-w-sm text-[clamp(2.8rem,5vw,5.5rem)] leading-[0.88] tracking-[-0.07em]">Route by requirement.</h2>
             <p className="mt-6 max-w-sm text-sm leading-6 text-[var(--ink2)]">
               The router reads the transition, the declared constraints, and the backends that are actually available. It picks one. The result always comes back in the same shape: a candidate state plus evidence.
@@ -272,7 +272,7 @@ export default function TechnicalBrief() {
 
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[var(--ink3)]">Failure semantics / 005</p>
+            <p className="eyebrow text-[var(--ink3)]">Failure</p>
             <p className="mt-8 max-w-sm text-sm leading-6 text-[var(--ink2)]">Failure is state. It should be inspectable, attributable, and safe by default.</p>
           </div>
           <div className="lg:col-span-8">
@@ -288,7 +288,7 @@ export default function TechnicalBrief() {
 
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[var(--ink3)]">Observation contract / 006</p>
+            <p className="eyebrow text-[var(--ink3)]">Observation</p>
           </div>
           <div className="grid gap-px bg-[var(--rule2)] lg:col-span-8 lg:grid-cols-2">
             <div className="min-h-[420px] bg-[var(--cobalt)] p-5 text-white sm:p-8">
@@ -306,7 +306,7 @@ export default function TechnicalBrief() {
 
         <section className="grid min-h-[72svh] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <p className="eyebrow text-[var(--ink3)]">Public beta / technical demos</p>
+            <p className="eyebrow text-[var(--ink3)]">Next</p>
           </div>
           <div className="flex flex-col justify-between p-5 sm:p-8 lg:col-span-8 lg:p-12">
             <h2 className="max-w-5xl text-[clamp(3.6rem,7.5vw,9rem)] font-[510] leading-[0.8] tracking-[-0.08em]">Build against a world that remembers.</h2>

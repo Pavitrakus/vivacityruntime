@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import { CodeTrace } from '@/components/code-trace';
+import { LineageMap } from '@/components/lineage-map';
 import { ObservationPlate } from '@/components/observation-plate';
 import { RuntimeInstrument } from '@/components/runtime-instrument';
 import { Reveal } from '@/components/reveal';
@@ -70,12 +71,7 @@ export default function Home() {
     <main className="min-h-screen bg-[var(--bg)] text-[var(--ink)]">
       <div className="site-shell">
         <div className="announce">
-          <p className="eyebrow text-[var(--ink3)]">
-            <span className="text-[var(--vermilion)]">Public beta</span>
-            <span className="mx-2 text-[var(--rule3)] sm:mx-3">/</span>
-            <span className="hidden sm:inline">Architecture Brief 001 is live</span>
-            <span className="sm:hidden">Brief 001</span>
-          </p>
+          <p className="eyebrow text-[var(--ink3)]">Architecture brief is live</p>
           <Link href="/technical-brief" className="link-mark eyebrow inline-flex shrink-0 items-center gap-1 text-[var(--ink)]">
             Read it <span aria-hidden="true">→</span>
           </Link>
@@ -87,15 +83,14 @@ export default function Home() {
           <div className="grid lg:grid-cols-12">
             <div className="flex flex-col justify-center border-b border-[color:var(--rule)] px-5 py-8 sm:px-8 sm:py-10 lg:col-span-5 lg:border-b-0 lg:border-r lg:py-14">
               <div className="flex items-center gap-3">
-                <span className="signal-square bg-[var(--vermilion)]" aria-hidden="true" />
+                <span className="signal-square bg-[var(--cobalt)]" aria-hidden="true" />
                 <p className="eyebrow">{siteConfig.status}</p>
               </div>
 
-              <h1 className="mt-7 max-w-[22ch] text-[clamp(2.4rem,7.6vw,5.2rem)] font-[560] leading-[0.86] tracking-[-0.075em] sm:mt-9">
+              <h1 className="type-display mt-7 max-w-[18ch] text-[clamp(2.6rem,8vw,5.6rem)] leading-[0.9] tracking-[-0.04em] sm:mt-9">
                 Executable simulation runtime for <span className="text-[var(--cobalt)]">AI agents.</span>
               </h1>
-              <span className="mt-6 block h-px w-14 bg-[var(--vermilion)]" aria-hidden="true" />
-              <p className="mt-6 max-w-[38rem] text-[clamp(1rem,2.4vw,1.2rem)] leading-[1.45] tracking-[-0.02em] text-[var(--ink2)] sm:mt-7">
+              <p className="mt-6 max-w-[38rem] text-[clamp(1rem,2.4vw,1.2rem)] leading-[1.5] tracking-[-0.015em] text-[var(--ink2)] sm:mt-8">
                 Describe a world. Preserve its state. Let an agent act, branch, simulate, and verify what happens next through the right execution backend.
               </p>
 
@@ -126,7 +121,7 @@ export default function Home() {
               <div className="marquee__track" aria-hidden="true">
                 {[...trust, ...trust].map((item, index) => (
                   <span key={index} className="mono flex items-center whitespace-nowrap px-8 text-sm tracking-[-0.01em] text-[var(--ink2)]">
-                    <span className="mr-3 inline-block h-1 w-1 bg-[var(--vermilion)]" /> {item}
+                    {item}
                   </span>
                 ))}
               </div>
@@ -136,17 +131,17 @@ export default function Home() {
 
         <section id="how" className="scroll-mt-28 border-t border-[color:var(--rule)]">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:p-12">
-            <h2 className="max-w-4xl text-[clamp(2.3rem,5.4vw,5.4rem)] font-[520] leading-[0.9] tracking-[-0.07em]">
+            <h2 className="type-display max-w-4xl text-[clamp(2.5rem,6vw,5.8rem)] leading-[0.92] tracking-[-0.035em]">
               Your planner proposes. Your backend computes.{' '}
               <span className="text-[var(--cobalt)]">Vivacity keeps the world they share.</span>
             </h2>
           </div>
-          <div className="grid grid-cols-2 gap-px bg-[var(--rule2)] lg:grid-cols-4">
+          <LineageMap />
+          <div className="grid grid-cols-1 gap-px bg-[var(--rule2)] sm:grid-cols-2 lg:grid-cols-4">
             {proofs.map(([, title, copy], index) => (
-              <div key={title} className="proof-cell flex min-h-48 flex-col justify-end bg-[var(--bg)] p-5 sm:min-h-52 sm:p-7">
-                <span className={`mb-4 block h-px w-8 ${index % 2 === 0 ? 'bg-[var(--cobalt)]' : 'bg-[var(--vermilion)]'}`} aria-hidden="true" />
-                <p className="text-[clamp(1.5rem,2.2vw,2.1rem)] leading-[0.95] tracking-[-0.05em]">{title}</p>
-                <p className="mt-3 max-w-xs text-sm leading-6 text-[var(--ink2)]">{copy}</p>
+              <div key={title} className="proof-cell flex min-h-52 flex-col justify-end bg-[var(--bg)] p-6 sm:min-h-64 sm:p-8">
+                <p className={`eyebrow ${index % 2 === 0 ? 'text-[var(--cobalt)]' : 'text-[var(--vermilion)]'}`}>{title}</p>
+                <p className="mt-6 max-w-xs text-[clamp(1.15rem,2vw,1.45rem)] leading-[1.25] tracking-[-0.03em] text-[var(--ink2)]">{copy}</p>
               </div>
             ))}
           </div>
@@ -154,7 +149,7 @@ export default function Home() {
 
         <section id="system" className="scroll-mt-28 border-t border-[color:var(--rule)]">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:p-12">
-            <h2 className="max-w-5xl text-[clamp(2.4rem,5.6vw,6rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
+            <h2 className="type-display max-w-5xl text-[clamp(2.6rem,6.2vw,6.2rem)] leading-[0.9] tracking-[-0.035em]">
               The layer between<br />
               <span className="text-[var(--vermilion)]">intent and consequence.</span>
             </h2>
@@ -162,8 +157,8 @@ export default function Home() {
           <div className="system-boundary grid lg:grid-cols-[1fr_1.45fr_1fr]">
             <article className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:border-b-0">
               <p className="eyebrow text-[var(--ink3)]">Agent</p>
-              <p className="mt-8 text-[clamp(1.7rem,3vw,2.4rem)] tracking-[-0.045em] lg:mt-14">Chooses the next action.</p>
-              <ul className="mono mt-8 space-y-2 text-[0.68rem] text-[var(--ink3)]">
+              <p className="mt-8 text-[clamp(1.9rem,3.4vw,2.6rem)] tracking-[-0.045em] lg:mt-14">Chooses the next action.</p>
+              <ul className="mono mt-8 hidden space-y-2 text-[0.68rem] text-[var(--ink3)] md:block">
                 <li>goal + context</li>
                 <li>action proposal</li>
                 <li>observation request</li>
@@ -172,10 +167,10 @@ export default function Home() {
             <article className="ambient relative overflow-hidden border-b border-[color:var(--rule)] bg-[var(--cobalt)] p-5 text-white sm:p-8 lg:border-b-0 lg:border-x">
               <div className="boundary-v" aria-hidden="true">V</div>
               <p className="eyebrow relative">Vivacity</p>
-              <p className="relative mt-8 max-w-lg text-[clamp(2.1rem,4vw,3.8rem)] leading-[0.9] tracking-[-0.06em] lg:mt-14">
+              <p className="relative mt-8 max-w-lg text-[clamp(2.2rem,4.2vw,3.8rem)] leading-[0.92] tracking-[-0.05em] lg:mt-14">
                 Holds state, forks, routing, and the commit gate.
               </p>
-              <ul className="mono relative mt-8 grid grid-cols-2 gap-2 text-[0.64rem] text-white/75">
+              <ul className="mono relative mt-8 hidden grid-cols-2 gap-2 text-[0.64rem] text-white/75 md:grid">
                 <li>persistent state</li>
                 <li>action contract</li>
                 <li>branch lineage</li>
@@ -186,8 +181,8 @@ export default function Home() {
             </article>
             <article className="p-5 sm:p-8">
               <p className="eyebrow text-[var(--ink3)]">Executor</p>
-              <p className="mt-8 text-[clamp(1.7rem,3vw,2.4rem)] tracking-[-0.045em] lg:mt-14">Computes the transition.</p>
-              <ul className="mono mt-8 space-y-2 text-[0.68rem] text-[var(--ink3)]">
+              <p className="mt-8 text-[clamp(1.9rem,3.4vw,2.6rem)] tracking-[-0.045em] lg:mt-14">Computes the transition.</p>
+              <ul className="mono mt-8 hidden space-y-2 text-[0.68rem] text-[var(--ink3)] md:block">
                 <li>exact solver</li>
                 <li>physics engine</li>
                 <li>learned model</li>
@@ -202,24 +197,18 @@ export default function Home() {
         <div className="site-shell !border-white/15">
           <div className="border-b border-white/15 p-5 sm:p-8 lg:p-12">
             <Reveal>
-              <h2 className="max-w-5xl text-[clamp(2.6rem,6.4vw,6.8rem)] font-[510] leading-[0.86] tracking-[-0.07em]">
+              <h2 className="type-display max-w-5xl text-[clamp(2.8rem,7vw,7rem)] leading-[0.9] tracking-[-0.035em]">
                 A world that <span className="text-[var(--vermilion)]">continues.</span>
               </h2>
             </Reveal>
           </div>
 
           <ol className="contract-rail grid md:grid-cols-4 xl:grid-cols-8">
-            {contract.map(([index, step, event]) => (
-              <li key={step} className="group min-h-44 border-b border-r border-white/15 p-4 transition-colors hover:bg-[var(--cobalt)] xl:border-b-0">
-                <div className="flex h-full flex-col justify-between">
-                  <div>
-                    <span className="mono text-[0.58rem] text-white/35">/{index}</span>
-                    <span className="mt-3 block h-1 w-1 bg-[var(--vermilion)]" aria-hidden="true" />
-                  </div>
-                  <div>
-                    <span className="block text-xl tracking-[-0.04em]">{step}</span>
-                    <span className="mono mt-2 block text-[0.55rem] uppercase leading-4 text-white/40 group-hover:text-white/75">{event}</span>
-                  </div>
+            {contract.map(([, step, event], index) => (
+              <li key={step} className={`group min-h-40 border-b border-r border-white/15 p-5 transition-colors hover:bg-[var(--cobalt)] xl:border-b-0 ${index === 5 ? 'bg-[var(--cobalt)]' : ''}`}>
+                <div className="flex h-full flex-col justify-end gap-3">
+                  <span className="block text-xl tracking-[-0.04em]">{step}</span>
+                  <span className="mono text-[0.58rem] uppercase leading-4 text-white/45 group-hover:text-white/80">{event}</span>
                 </div>
               </li>
             ))}
@@ -227,7 +216,7 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-12">
             <div className="border-b border-white/15 p-5 sm:p-8 lg:col-span-5 lg:border-b-0 lg:border-r">
-              <h3 className="max-w-md text-[clamp(2rem,4.2vw,4.2rem)] leading-[0.92] tracking-[-0.055em]">
+              <h3 className="type-display max-w-md text-[clamp(2.1rem,4.6vw,4.4rem)] leading-[0.94] tracking-[-0.03em]">
                 Try three futures. Keep the one that holds.
               </h3>
               <p className="mt-7 max-w-sm text-sm leading-6 text-white/60">
@@ -244,7 +233,7 @@ export default function Home() {
       <div className="site-shell">
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <h2 className="max-w-md text-[clamp(2.4rem,5vw,5.2rem)] font-[520] leading-[0.88] tracking-[-0.065em]">
+            <h2 className="type-display max-w-md text-[clamp(2.5rem,5.4vw,5.4rem)] leading-[0.9] tracking-[-0.035em]">
               Same contract.{' '}
               <span className="text-[var(--cobalt)]">The backend that fits.</span>
             </h2>
@@ -253,12 +242,11 @@ export default function Home() {
             </p>
           </div>
           <div className="lg:col-span-8">
-            {routes.map(([index, title, copy, signal]) => (
-              <Reveal key={title} className="route-row grid min-h-40 grid-cols-[54px_1fr] border-b border-[color:var(--rule)] last:border-b-0 sm:grid-cols-[72px_1.1fr_1fr_auto]">
-                <span className="mono p-4 text-xs text-[var(--ink3)] sm:p-6">{index}</span>
-                <h3 className="border-l border-[color:var(--rule)] p-4 text-[clamp(1.45rem,2.6vw,2.5rem)] leading-[0.98] tracking-[-0.05em] sm:p-6">{title}</h3>
-                <p className="col-span-2 border-l border-t border-[color:var(--rule)] p-4 text-sm leading-6 text-[var(--ink2)] sm:col-span-1 sm:border-t-0 sm:p-6">{copy}</p>
-                <span className="mono hidden items-end p-6 text-[0.58rem] text-[var(--cobalt)] sm:flex">{signal}</span>
+            {routes.map(([, title, copy, signal], index) => (
+              <Reveal key={title} className="route-row grid min-h-44 border-b border-[color:var(--rule)] last:border-b-0 sm:grid-cols-[1.1fr_1fr_auto]">
+                <h3 className="p-5 text-[clamp(1.7rem,3vw,2.6rem)] leading-[0.98] tracking-[-0.045em] sm:p-7">{title}</h3>
+                <p className="border-t border-[color:var(--rule)] p-5 text-sm leading-6 text-[var(--ink2)] sm:border-t-0 sm:border-l sm:p-7">{copy}</p>
+                <span className={`mono hidden items-end p-7 text-[0.58rem] sm:flex ${index % 2 === 0 ? 'text-[var(--cobalt)]' : 'text-[var(--vermilion)]'}`}>{signal}</span>
               </Reveal>
             ))}
           </div>
@@ -267,7 +255,7 @@ export default function Home() {
         <section className="border-b border-[color:var(--rule)]">
           <div className="p-5 sm:p-8 lg:p-12">
             <Reveal>
-              <h2 className="text-[clamp(2.4rem,5.8vw,5.8rem)] font-[520] leading-[0.88] tracking-[-0.07em]">
+              <h2 className="type-display text-[clamp(2.6rem,6.4vw,6.2rem)] leading-[0.9] tracking-[-0.035em]">
                 State is what is true.<br />
                 <span className="text-[var(--vermilion)]">Observation is what an agent sees.</span>
               </h2>
@@ -275,24 +263,24 @@ export default function Home() {
           </div>
 
           <div className="grid gap-px bg-[var(--rule2)] md:grid-cols-3">
-            <ObservationPlate kind="orbit" index={1} />
-            <ObservationPlate kind="contact" index={2} />
-            <ObservationPlate kind="flow" index={3} />
+            <ObservationPlate kind="orbit" />
+            <ObservationPlate kind="contact" />
+            <ObservationPlate kind="flow" />
           </div>
         </section>
 
         <section id="use-cases" className="scroll-mt-28 border-b border-[color:var(--rule)]">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:p-12">
-            <h2 className="max-w-4xl text-[clamp(2.3rem,5vw,5.2rem)] font-[520] leading-[0.9] tracking-[-0.065em]">
+            <h2 className="type-display max-w-4xl text-[clamp(2.5rem,5.6vw,5.4rem)] leading-[0.92] tracking-[-0.035em]">
               Built for stacks that already have an agent and a world.
             </h2>
           </div>
           <div className="grid gap-px bg-[var(--rule2)] sm:grid-cols-2 lg:grid-cols-4">
             {useCases.map(([tag, title, copy], index) => (
-              <Reveal key={title} className="use-card flex min-h-60 flex-col justify-between bg-[var(--bg)] p-5 sm:p-7">
+              <Reveal key={title} className="use-card flex min-h-72 flex-col justify-between bg-[var(--bg)] p-6 sm:min-h-80 sm:p-8">
                 <span className={`eyebrow ${index % 2 === 0 ? 'text-[var(--cobalt)]' : 'text-[var(--vermilion)]'}`}>{tag}</span>
                 <div>
-                  <p className="text-2xl leading-[1.05] tracking-[-0.04em]">{title}</p>
+                  <p className="text-[clamp(1.7rem,2.6vw,2.3rem)] leading-[1.05] tracking-[-0.04em]">{title}</p>
                   <p className="mt-4 text-sm leading-6 text-[var(--ink2)]">{copy}</p>
                 </div>
               </Reveal>
@@ -302,7 +290,7 @@ export default function Home() {
 
         <section className="grid border-b border-[color:var(--rule)] lg:grid-cols-12">
           <div className="border-b border-[color:var(--rule)] p-5 sm:p-8 lg:col-span-4 lg:border-b-0 lg:border-r">
-            <h2 className="max-w-xs text-[clamp(2rem,3.8vw,3.4rem)] leading-[0.92] tracking-[-0.055em]">
+            <h2 className="type-display max-w-xs text-[clamp(2.2rem,4.2vw,3.6rem)] leading-[0.94] tracking-[-0.03em]">
               Questions
             </h2>
           </div>
@@ -322,7 +310,7 @@ export default function Home() {
         <section className="grid min-h-[56svh] lg:grid-cols-12">
           <div className="flex flex-col justify-between p-5 sm:p-8 lg:col-span-12 lg:p-12">
             <Reveal>
-              <h2 className="max-w-5xl text-[clamp(2.8rem,6.8vw,7.4rem)] font-[510] leading-[0.84] tracking-[-0.075em]">
+              <h2 className="type-display max-w-5xl text-[clamp(3rem,7.4vw,7.6rem)] leading-[0.88] tracking-[-0.04em]">
                 Bring your intelligence.<br />
                 <span className="text-[var(--cobalt)]">Bring your execution.</span>
               </h2>

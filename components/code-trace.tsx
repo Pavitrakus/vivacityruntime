@@ -17,7 +17,7 @@ export function CodeTrace() {
   return (
     <div className="code-panel overflow-x-auto">
       <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 sm:px-6">
-        <p className="eyebrow text-white/45">Contract / illustrative</p>
+        <p className="eyebrow text-white/45">Contract</p>
         <p className="mono text-[0.55rem] uppercase tracking-[0.1em] text-[#c4a06a]">semantics, not an SDK</p>
       </div>
       <pre className="mono min-w-[28rem] p-5 text-[0.8rem] leading-7 sm:p-7">

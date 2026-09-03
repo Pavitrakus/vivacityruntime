@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
+const display = Instrument_Serif({ weight: '400', subsets: ['latin'], variable: '--font-display' });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://vivacityruntime.vercel.app'),
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${display.variable}`}>{children}</body>
     </html>
   );
 }

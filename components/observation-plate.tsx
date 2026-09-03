@@ -6,21 +6,18 @@ const plates = {
   orbit: {
     src: '/plate-orbit.webp',
     title: 'Orbital state',
-    index: 'OBS / 01',
     caption: 'Three transfers from one parent state',
     alt: 'Orbital trajectories branching from a single persistent world state',
   },
   contact: {
     src: '/plate-contact.webp',
     title: 'Contact action',
-    index: 'OBS / 02',
     caption: 'Gripper force across isolated forks',
     alt: 'Robotic contact action compared across isolated forks',
   },
   flow: {
     src: '/plate-fluid.webp',
     title: 'Flow state',
-    index: 'OBS / 03',
     caption: 'Wake outcomes after a single commit gate',
     alt: 'Fluid wake outcomes after a verified commit',
   },
@@ -85,7 +82,7 @@ const schemes = {
   flow: FlowScheme,
 };
 
-export function ObservationPlate({ kind, index }: { kind: PlateKey; index: number }) {
+export function ObservationPlate({ kind }: { kind: PlateKey }) {
   const item = plates[kind];
   const Scheme = schemes[kind];
   const [cursor, setCursor] = useState<{ x: number; y: number; nx: number; ny: number } | null>(null);
@@ -114,9 +111,6 @@ export function ObservationPlate({ kind, index }: { kind: PlateKey; index: numbe
           <div className="plate-grid absolute inset-0" />
           <Scheme />
         </div>
-        <div className="mono absolute left-3 top-3 z-10 bg-[var(--bg)] px-2 py-1 text-[0.55rem] text-[var(--ink)]">
-          STATE VIEW / 0{index}
-        </div>
         {cursor ? (
           <div className="plate-reticle" style={{ left: cursor.x, top: cursor.y }} aria-hidden="true">
             <span className="plate-reticle__ring" />
@@ -128,12 +122,9 @@ export function ObservationPlate({ kind, index }: { kind: PlateKey; index: numbe
           </div>
         ) : null}
       </div>
-      <figcaption className="grid grid-cols-[1fr_auto] items-end gap-4 border-t border-[color:var(--rule)] p-4">
-        <div>
-          <span className="eyebrow block text-[var(--ink3)]">{item.index}</span>
-          <span className="mt-2 block text-sm tracking-[-0.02em]">{item.title}</span>
-        </div>
-        <span className="max-w-[9rem] text-right text-xs leading-5 text-[var(--ink3)]">{item.caption}</span>
+      <figcaption className="grid grid-cols-[1fr_auto] items-end gap-4 border-t border-[color:var(--rule)] p-4 sm:p-5">
+        <span className="text-[clamp(1.05rem,2vw,1.25rem)] tracking-[-0.03em]">{item.title}</span>
+        <span className="max-w-[11rem] text-right text-xs leading-5 text-[var(--ink3)]">{item.caption}</span>
       </figcaption>
     </figure>
   );
