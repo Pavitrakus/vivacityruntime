@@ -299,6 +299,22 @@ a:focus-visible,button:focus-visible { outline:2px solid var(--vermilion); outli
 .schedule-email { padding:34px clamp(22px,5vw,84px); display:flex; justify-content:space-between; gap:20px; border-bottom:1px solid var(--rule); }
 .schedule-email span { color:var(--ink3); }
 
+/* Theme polarity: light mode retains the original carbon instruments. Dark mode
+   reverses those fixed dark plates to bone while preserving signal hues. */
+.dark .hero-research-image img { filter:invert(1) hue-rotate(180deg) saturate(.96) contrast(1.06); }
+.dark .instrument-section { background:#f3f0e7; color:#08090a; border-color:rgba(8,9,10,.18); }
+.dark .instrument-copy { border-color:rgba(8,9,10,.18); }
+.dark .instrument-copy>p:not(.section-index) { color:#56544e; }
+.dark .instrument-copy .text-link { border-color:#08090a; }
+.dark .runtime-frame { filter:invert(1) hue-rotate(180deg); box-shadow:0 28px 80px rgba(242,239,230,.12); }
+.dark .research-spectrum { background:#f3f0e7; color:#08090a; border-block:1px solid rgba(8,9,10,.16); }
+.dark .research-spectrum p { color:#5f5c55; }
+.dark .loading-intro { background:#f3f0e7; color:#08090a; }
+.dark .intro-grid { filter:invert(1); }
+.dark .intro-axis { background:rgba(8,9,10,.18); }
+.dark .intro-state { color:rgba(8,9,10,.48); }
+.dark .intro-aperture { background:#08090a; box-shadow:0 0 30px rgba(8,9,10,.28); }
+
 @media (max-width:900px) {
   .floating-header { top:10px; width:calc(100% - 20px); }
   .floating-header[data-compact=true] { width:calc(100% - 20px); }
