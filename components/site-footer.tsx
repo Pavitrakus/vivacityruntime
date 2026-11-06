@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { Brand } from '@/components/brand';
 import { siteConfig } from '@/lib/site-config';
 import { MediaVideo } from '@/components/media-video';
-import { MotionSetting } from '@/components/motion-setting';
 
 export function SiteFooter() {
   return (
@@ -51,7 +50,6 @@ export function SiteFooter() {
         <a href="https://svs.gsfc.nasa.gov/31400/">
           Visual study: NASA / Timothy Sandstrom
         </a>
-        <MotionSetting />
       </div>
     </footer>
   );

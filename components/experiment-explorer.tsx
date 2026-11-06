@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useMotionAllowed } from '@/hooks/use-motion-allowed';
+import { TorusStudy } from '@/components/torus-study';
 import {
   globalMinimum,
   iterations,
@@ -15,33 +16,11 @@ import {
 } from '@/lib/calibration-study';
 
 const paths = searchPaths();
-const tau = Math.PI * 2;
-function project(u: number, v: number) {
-  const radius = 142 + 55 * Math.cos(v);
-  return [
-    230 + radius * Math.cos(u),
-    133 + radius * Math.sin(u) * 0.34 - 55 * Math.sin(v) * 0.88,
-  ];
-}
 function curve(points: number[][]) {
   return points
     .map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(2)},${y.toFixed(2)}`)
     .join(' ');
 }
-const rings = Array.from({ length: 15 }, (_, v) =>
-  curve(
-    Array.from({ length: 97 }, (_, u) =>
-      project((u / 96) * tau, (v / 15) * tau),
-    ),
-  ),
-);
-const sections = Array.from({ length: 32 }, (_, u) =>
-  curve(
-    Array.from({ length: 65 }, (_, v) =>
-      project((u / 32) * tau, (v / 64) * tau),
-    ),
-  ),
-);
 const plot = (x: number) => [28 + x * 404, 370 - loss(x) * 148];
 const landscape = curve(Array.from({ length: 241 }, (_, i) => plot(i / 240)));
 const modelPoint = (time: number, value: number) => [
@@ -80,7 +59,7 @@ export function ExperimentExplorer() {
       }
       if (previous) time += Math.min(now - previous, 100);
       previous = now;
-      if (now - lastDraw >= 1000 / 24) {
+      if (now - lastDraw >= 15) {
         setElapsed(time / 1000);
         lastDraw = now;
       }
@@ -161,50 +140,36 @@ export function ExperimentExplorer() {
               {Math.round(exactStep)} / {iterations}
             </span>
           </div>
-          <svg
-            viewBox="0 0 460 425"
-            aria-label="A parameter-space study and its objective landscape"
-            style={{ opacity: fade }}
-          >
-            <title>Searching a multimodal objective function.</title>
-            <g className="torus-wire">
-              {rings.map((d, i) => (
-                <path key={`r${i}`} d={d} />
-              ))}
-              {sections.map((d, i) => (
-                <path key={`s${i}`} d={d} />
-              ))}
-            </g>
-            <path
-              className="torus-section"
-              d={curve(
-                Array.from({ length: 65 }, (_, i) =>
-                  project((x - 0.08) * tau, (i / 64) * tau),
-                ),
-              )}
-            />
-            <path className="loss-curve" d={landscape} />
-            <circle
-              className="loss-dot"
-              cx={px.toFixed(3)}
-              cy={py.toFixed(3)}
-              r="4.5"
-            />
-            <path
-              className="plot-axis"
-              d="M28 400H432 M28 395L23 400L28 405 M432 395L437 400L432 405"
-            />
-            <text x="230" y="420" textAnchor="middle">
-              CANDIDATE PARAMETER
-            </text>
-            <text
-              x={plot(globalMinimum)[0].toFixed(3)}
-              y="385"
-              textAnchor="middle"
+          <div className="search-drawing">
+            <TorusStudy parameter={x} moving={allowed} />
+            <svg
+              viewBox="0 0 460 425"
+              aria-label="A parameter-space study and its objective landscape"
             >
-              GLOBAL MINIMUM
-            </text>
-          </svg>
+              <title>Searching a multimodal objective function.</title>
+              <path className="loss-curve" d={landscape} />
+              <circle
+                className="loss-dot"
+                cx={px.toFixed(3)}
+                cy={py.toFixed(3)}
+                r="4.5"
+              />
+              <path
+                className="plot-axis"
+                d="M28 400H432 M28 395L23 400L28 405 M432 395L437 400L432 405"
+              />
+              <text x="230" y="420" textAnchor="middle">
+                CANDIDATE PARAMETER
+              </text>
+              <text
+                x={plot(globalMinimum)[0].toFixed(3)}
+                y="385"
+                textAnchor="middle"
+              >
+                GLOBAL MINIMUM
+              </text>
+            </svg>
+          </div>
           <div className="search-value">
             <span>Objective value</span>
             <output aria-live="off">{loss(x).toFixed(3)}</output>

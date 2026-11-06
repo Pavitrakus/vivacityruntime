@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { motionAllowed, motionEvent } from '@/lib/motion-preference';
+import { motionAllowed } from '@/lib/motion-preference';
 
 export type PandaController = {
   point(x: number, y: number): boolean;
@@ -277,7 +277,6 @@ export async function createPandaScene(
     request();
   };
   media.addEventListener('change', reduce);
-  window.addEventListener(motionEvent, reduce);
   const theme = () => {
     const dark = document.documentElement.classList.contains('dark');
     (table.material as THREE.MeshStandardMaterial).color.setHex(
@@ -309,7 +308,6 @@ export async function createPandaScene(
     themeObserver.disconnect();
     document.removeEventListener('visibilitychange', visibility);
     media.removeEventListener('change', reduce);
-    window.removeEventListener(motionEvent, reduce);
     renderer.domElement.removeEventListener('webglcontextlost', lost);
     for (const geometry of meshes) geometry.dispose();
     for (const material of materials) material.dispose();

@@ -14,7 +14,7 @@ The November 2026 direction follows the user’s latest request for a cinematic 
 
 The duplicate torus has been replaced with a model-calibration study. The left panel illustrates candidate search on a multimodal analytic objective; the right fits a damped response x(t) = exp(-c t) cos(3.8 t) to twelve explicitly synthetic observations. Each update uses only the observations currently revealed. The lower trace shows observed-minus-predicted residuals. The numerical test verifies that the fit recovers the generating damping coefficient and reduces squared residual error. These are mathematical illustrations, not Vivacity benchmark or hardware results.
 
-The studies run on a fourteen-second cycle: eleven seconds of search and observation updates, a final-state hold, and a brief fade across the reset. Intermediate display states are smoothly interpolated for motion; they are not additional experiment records. Rendering is capped at 24 fps and stops when the region or tab is hidden. There is no playback toolbar or iteration slider. A single footer motion preference controls the studies, videos, and Panda animation, honors reduced-motion and data-saving defaults, and persists an explicit user preference when storage is available.
+The data studies repeat on a fourteen-second cycle with smoothly interpolated display states; these are not additional experiment records. The torus is a separately rendered three-dimensional wireframe, projected live onto a high-DPI canvas at up to 60 fps. Its orientation evolves continuously without a cycle reset, fade, or end-state pause. Mouse movement adds a restrained, damped camera response. Geometry is precomputed and projected each frame, with depth-sorted linework. All rendering stops outside the viewport or in hidden tabs. There are no playback controls or motion-setting button. Operating-system reduced-motion and data-saving preferences determine automatic motion; obsolete local-storage settings are ignored.
 
 The Panda repeats its authored kinematic sequence with a short dwell at the endpoint. Selecting the actual mesh still opens the workspace; clicking the surrounding stage does not. The navigation transition uses a flat, expanding organic shape instead of a blurred gradient.
 
@@ -29,7 +29,7 @@ Existing orbital and flow plates are reused on the contact and partnership pages
 - Next production build and Vinext deployment build are checked for this direction.
 - Scoped lint and standalone TypeScript checks cover the changed components.
 - The analytic search checks pass, as do the Panda checks for 253 motion samples, all seven joint limits, gripper orientation, TCP checkpoints, and continuity.
-- Desktop browser checks cover video pause, viewport-based loading, continuous study playback and the global motion preference, delayed robot loading, and robot-only raycast navigation to the actual workspace. Back returns without retaining the transition overlay.
+- Desktop browser checks cover video pause, viewport-based loading, continuous geometry playback and automatic motion preferences, delayed robot loading, and robot-only raycast navigation to the actual workspace. Back returns without retaining the transition overlay.
 - 320-pixel and 390 × 844 viewport checks cover the opening, mobile menu, Escape dismissal, scientific plots, Research, the product guide, and the date/time contact flow. The email link correctly includes the selected date and time; no email was sent. No horizontal document overflow was observed.
 - Browser testing found an SVG title hydration mismatch; each title now renders one string to keep server and browser markup aligned. A clean production reload showed no console or hydration errors.
 - Motion and data-saving preferences have explicit implementation paths; operating-system preference changes were not emulated through browser tooling.
@@ -38,3 +38,5 @@ The opening loop is approximately 1.1 MB. The user-supplied Inferno video is 0.5
 
 
 Final-polish media budget: the dedicated footer detail loop is approximately 1.05 MB and its poster is 18.7 KB. The full NASA research film remains deferred separately. SVG coordinates are serialized to three decimal places to avoid platform-dependent floating-point hydration differences.
+
+The arrival animation and route-loading boundary were removed. Navigation keeps the current page until the destination is ready, rather than presenting a custom loader.

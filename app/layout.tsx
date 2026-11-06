@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
-import { LoadingIntro } from '@/components/loading-intro';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 const geistMono = Geist_Mono({
@@ -52,7 +51,6 @@ export default function RootLayout({
         <a className="skip-link" href="#content">
           Skip to content
         </a>
-        <LoadingIntro />
         {children}
       </body>
     </html>
