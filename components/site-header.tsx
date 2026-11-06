@@ -1,47 +1,110 @@
 'use client';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Brand } from '@/components/brand';
-import { ThemeToggle } from '@/components/theme-toggle';
-import { demoHref, demoLinkProps } from '@/lib/site-config';
 
-const links = [['/research', 'Research'], ['/docs', 'Docs'], ['/early-access', 'Early access']] as const;
-
+const links = [
+  ['/research', 'Research'],
+  ['/docs', 'Product guide'],
+  ['/early-access', 'Work with us'],
+] as const;
 export function SiteHeader() {
-  const [compact, setCompact] = useState(false);
-  const [open, setOpen] = useState(false);
   const pathname = usePathname();
-
+  const [open, setOpen] = useState(false);
+  const [dark, setDark] = useState(pathname === '/');
+  const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const update = () => setCompact(window.scrollY > 56);
-    update();
+    const update = () => {
+      const sections =
+        document.querySelectorAll<HTMLElement>('[data-nav-theme]');
+      let current = false;
+      for (const section of sections) {
+        const r = section.getBoundingClientRect();
+        if (r.top <= 52 && r.bottom > 52) {
+          current = section.dataset.navTheme === 'dark';
+          break;
+        }
+      }
+      setDark(current);
+      setScrolled(window.scrollY > 40);
+    };
+    const frame = requestAnimationFrame(update);
     window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
-  }, []);
-
+    window.addEventListener('resize', update);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, [pathname]);
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        document.querySelector<HTMLButtonElement>('.nav-menu')?.focus();
+      }
+    };
+    document.addEventListener('keydown', close);
+    return () => document.removeEventListener('keydown', close);
+  }, [open]);
   return (
-    <header className="floating-header" data-compact={compact} data-open={open}>
-      <div className="floating-nav">
+    <header
+      className="cinema-header"
+      data-dark={dark}
+      data-open={open}
+      data-scrolled={scrolled}
+    >
+      <div className="cinema-nav">
         <Brand />
         <nav className="nav-links" aria-label="Primary navigation">
           {links.map(([href, label]) => (
-            <Link key={href} href={href} aria-current={pathname === href ? 'page' : undefined} onClick={() => setOpen(false)}>{label}</Link>
+            <Link
+              prefetch={false}
+              key={href}
+              href={href}
+              aria-current={pathname === href ? 'page' : undefined}
+            >
+              {label}
+            </Link>
           ))}
         </nav>
         <div className="nav-actions">
-          <ThemeToggle />
-          <a href={demoHref} {...demoLinkProps} className="nav-contact">Talk to us <span aria-hidden="true">↗</span></a>
-          <button className="nav-menu" type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-label={open ? 'Close menu' : 'Open menu'}>
-            {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+          <Link prefetch={false} href="/schedule" className="cinema-pill">
+            Talk to us <span aria-hidden="true">↗</span>
+          </Link>
+          <button
+            type="button"
+            className="nav-menu"
+            onClick={() => setOpen(!open)}
+            aria-controls="mobile-navigation"
+            aria-expanded={open}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+          >
+            {open ? <X /> : <Menu />}
           </button>
         </div>
       </div>
-      <nav className="mobile-nav" aria-label="Mobile navigation">
-        {links.map(([href, label]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}
-        <a href={demoHref} {...demoLinkProps}>Talk to us ↗</a>
+      <nav
+        id="mobile-navigation"
+        className="mobile-nav"
+        aria-label="Mobile navigation"
+      >
+        {links.map(([href, label]) => (
+          <Link
+            prefetch={false}
+            key={href}
+            href={href}
+            onClick={() => setOpen(false)}
+          >
+            {label}
+          </Link>
+        ))}
+        <Link prefetch={false} href="/schedule" onClick={() => setOpen(false)}>
+          Talk to us ↗
+        </Link>
       </nav>
     </header>
   );

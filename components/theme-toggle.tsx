@@ -17,7 +17,11 @@ export function ThemeToggle() {
     const next = !dark;
     document.documentElement.classList.toggle('dark', next);
     document.documentElement.style.colorScheme = next ? 'dark' : 'light';
-    window.localStorage.setItem('vivacity-theme', next ? 'dark' : 'light');
+    try {
+      window.localStorage.setItem('vivacity-theme', next ? 'dark' : 'light');
+    } catch {
+      /* The theme also works when storage is disabled. */
+    }
     setDark(next);
   }
 
@@ -29,7 +33,11 @@ export function ThemeToggle() {
       aria-label={dark ? 'Use light theme' : 'Use dark theme'}
       title={dark ? 'Use light theme' : 'Use dark theme'}
     >
-      {dark ? <Sun className="size-3.5" aria-hidden="true" /> : <Moon className="size-3.5" aria-hidden="true" />}
+      {dark ? (
+        <Sun className="size-3.5" aria-hidden="true" />
+      ) : (
+        <Moon className="size-3.5" aria-hidden="true" />
+      )}
     </button>
   );
 }

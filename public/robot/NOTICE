@@ -1,0 +1,13 @@
+Franka Emika Panda visual model
+Source: Google DeepMind MuJoCo Menagerie, franka_emika_panda
+https://github.com/google-deepmind/mujoco_menagerie/tree/main/franka_emika_panda
+Model license: Apache License 2.0 (included in LICENSE).
+Derived upstream from the Franka Emika Panda URDF description.
+
+Changes for Vivacity: simplified mesh geometry, consolidated materials per link,
+converted MJCF hierarchy to GLB. This is a visual kinematic preview, with an
+independently authored joint trajectory. It does not run MuJoCo dynamics.
+
+Technical reference reviewed:
+https://github.com/Chidanand26/franka-arm-ik-sim
+No application code or analytical solver from that repository is distributed here.

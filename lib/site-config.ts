@@ -1,14 +1,10 @@
 export const siteConfig = {
   name: 'Vivacity',
-  status: 'Private technical access',
+  status: 'Robotics preview',
   email: 'help@tryvivacity.com',
   bookingUrl: '' as string,
 };
 
-export const demoHref =
-  siteConfig.bookingUrl ||
-  '/schedule';
+export const demoHref = 'https://demo.tryvivacity.com/workspace';
 
-export const demoLinkProps = siteConfig.bookingUrl
-  ? { target: '_blank' as const, rel: 'noopener noreferrer' }
-  : {};
+export const demoLinkProps = {};

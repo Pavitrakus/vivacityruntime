@@ -1,127 +1,213 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
-import { OpticalField } from '@/components/optical-field';
-import { FluidImage } from '@/components/fluid-image';
-import { RuntimeInstrument } from '@/components/runtime-instrument';
+import { MediaVideo } from '@/components/media-video';
+import { ExperimentExplorer } from '@/components/experiment-explorer';
+import { LazyPanda } from '@/components/lazy-panda';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
-import { demoHref, demoLinkProps, siteConfig } from '@/lib/site-config';
-
-const research = [
-  ['01', 'World representation', 'How agents can work with environments that change, persist, and respond over time.'],
-  ['02', 'Action and consequence', 'How proposed actions can be tested against constraints before they reach the real world.'],
-  ['03', 'Execution systems', 'How different computational tools can take part in one reliable agent loop.'],
-];
 
 export default function Home() {
   return (
-    <main>
+    <main id="content" className="cinematic-home">
       <SiteHeader />
-      <section className="hero">
-        <div className="hero-grid">
-          <div className="hero-copy">
-            <div className="status-line"><span /> PRIVATE TECHNICAL ACCESS</div>
-            <h1>Intelligence that can <em>act</em> in the world.</h1>
-            <p>Vivacity is building infrastructure for agents that need more than an answer. They need to understand changing conditions, take action, and stay grounded in what happens next.</p>
-            <div className="hero-actions">
-              <a href={demoHref} {...demoLinkProps} className="button button-dark">Work with Vivacity <ArrowUpRight /></a>
-              <Link href="/research" className="text-link">Explore our research <span>↗</span></Link>
-            </div>
-          </div>
-          <figure className="hero-research-image">
-            <Image src="/plate-flow.png" alt="A sampled computational flow field around a physical boundary" fill priority sizes="(max-width: 900px) 100vw, 55vw" />
-            <div className="hero-image-grid" aria-hidden="true" />
-            <span className="hero-image-term term-a">∂W / ∂t</span>
-            <span className="hero-image-term term-b">HUMAN-DEFINED PHYSICS</span>
-            <span className="hero-image-term term-c">RUNTIME FOR NON-LIVING SYSTEMS</span>
-            <figcaption>FIELD OBSERVATION / 001</figcaption>
-          </figure>
+      <section className="cinema-hero" data-nav-theme="dark">
+        <MediaVideo
+          src="/media/field-loop.mp4"
+          poster="/media/field-poster.jpg"
+          label="Abstract flowing field"
+          className="hero-film"
+          priority
+        />
+        <div className="hero-shade" />
+        <div className="cinema-hero-content">
+          <h1>
+            Virtual labs.
+            <br />
+            Physical questions.
+          </h1>
+          <p>
+            We’re building virtual labs where AI agents can run controlled
+            experiments in physical systems.
+          </p>
         </div>
-        <a href="#thesis" className="hero-scroll" aria-label="Continue to our thesis"><ArrowDown /> OUR THESIS</a>
+        <a
+          className="cinema-scroll"
+          href="#experiment"
+          aria-label="Explore Vivacity"
+        >
+          <ArrowDown size={18} />
+        </a>
       </section>
-
-      <section id="thesis" className="statement-section">
-        <p className="section-index">01 / OUR THESIS</p>
-        <h2>Language helped machines understand what we say. The next step is helping them understand what their actions <span>change.</span></h2>
+      <section className="cinema-thesis" data-nav-theme="dark">
+        <h2>
+          A prediction tells you
+          <br />
+          what might happen.
+          <br />
+          <span>An experiment asks why.</span>
+        </h2>
+        <p>
+          When a robot misses a grasp, repeating the task is only one option.
+          Change the friction. Test another approach. Ask which result would
+          distinguish one explanation from another.
+        </p>
       </section>
-
-      <section className="research-section">
-        <div className="research-intro">
-          <p className="section-index">02 / ACTIVE RESEARCH</p>
-          <h2>Building for the space between intent and consequence.</h2>
-          <p>Our work focuses on the systems an agent needs to reason about an environment, make a choice, and learn from the result. We publish when the work is ready to be useful.</p>
-          <Link href="/research" className="text-link">Research index <span>↗</span></Link>
+      <section
+        id="experiment"
+        className="science-section"
+        data-nav-theme="light"
+      >
+        <div className="open-intro">
+          <h2>
+            Choose the experiment.
+            <br />
+            Constrain the model.
+          </h2>
+          <p>
+            An agent needs to decide what to test and how to interpret the
+            result. We study both: searching for informative interventions and
+            using observations to constrain a physical model.
+          </p>
         </div>
-        <div className="research-list">
-          {research.map(([index, title, copy]) => (
-            <article key={index}>
-              <span>{index}</span>
-              <div><h3>{title}</h3><p>{copy}</p></div>
-              <Link href="/research" aria-label={'Read about ' + title}>↗</Link>
-            </article>
+        <ExperimentExplorer />
+      </section>
+      <section className="cinema-mission" data-nav-theme="light">
+        <MediaVideo
+          src="/media/inferno.webm"
+          poster="/media/inferno-poster.jpg"
+          label="Illustrative evolving field"
+          className="inferno-film"
+        />
+        <div>
+          <h2>
+            A place to ask
+            <br />
+            “what if?”
+          </h2>
+          <p>
+            Physical reasoning needs somewhere to meet consequences. Vivacity is
+            developing an experimental workflow around simulation: establish a
+            starting state, change a condition, run the trial, and examine the
+            result.
+          </p>
+          <p>
+            The goal is a useful loop between hypotheses and evidence—with the
+            conditions of each experiment kept explicit.
+          </p>
+          <Link prefetch={false} href="/docs" className="cinema-link">
+            Explore the approach <ArrowUpRight size={18} />
+          </Link>
+        </div>
+      </section>
+      <section className="cosmic-section" data-nav-theme="dark">
+        <MediaVideo
+          src="/media/solar-flows.mp4"
+          poster="/media/solar-flows-poster.jpg"
+          label="NASA solar magnetoconvection visualization"
+        />
+        <div className="cosmic-copy">
+          <h2>
+            Test the model.
+            <br />
+            Measure the gap.
+          </h2>
+          <p>
+            A convincing simulation can still rest on the wrong assumptions. Our
+            research asks how agents can recognize that boundary, design a
+            discriminating test, and revise the model.
+          </p>
+          <Link prefetch={false} href="/research" className="cinema-link">
+            Our research agenda <ArrowUpRight size={18} />
+          </Link>
+        </div>
+        <p className="media-credit">
+          Solar magnetoconvection visualization ·{' '}
+          <a href="https://svs.gsfc.nasa.gov/31400/">
+            NASA / Timothy Sandstrom
+          </a>
+          <br />
+          External scientific visualization, not a Vivacity result.
+        </p>
+      </section>
+      <section className="robot-section" data-nav-theme="light">
+        <div className="robot-copy">
+          <h2>
+            Start with
+            <br />
+            something
+            <br />
+            physical.
+          </h2>
+          <p>
+            Robotics gives us a concrete place to begin: geometry, contact,
+            control, and failures we can observe.
+          </p>
+          <p>
+            Our early workspace is a bounded robotics demonstration. The arm
+            beside you is a live, kinematic pick-and-place visualization. Select
+            it to explore the workspace.
+          </p>
+          <Link prefetch={false} href="/docs#limits" className="cinema-link">
+            What’s available today <ArrowUpRight size={18} />
+          </Link>
+        </div>
+        <LazyPanda />
+      </section>
+      <section className="cinema-research" data-nav-theme="light">
+        <div className="open-intro">
+          <h2>
+            Better questions.
+            <br />
+            Stronger evidence.
+          </h2>
+          <p>
+            We are working toward agents that do more than predict an outcome.
+            They should choose useful tests, learn from disagreement, and
+            preserve enough context for another engineer to check the result.
+          </p>
+        </div>
+        <div className="agenda-lines">
+          {[
+            [
+              'experiments',
+              'Which experiment comes next?',
+              'Choose interventions that separate competing explanations.',
+            ],
+            [
+              'models',
+              'What should change when a model is wrong?',
+              'Distinguish uncertain parameters from missing mechanisms.',
+            ],
+            [
+              'evidence',
+              'Can someone else reproduce the result?',
+              'Preserve the state, assumptions, and measurements that matter.',
+            ],
+          ].map(([id, title, copy]) => (
+            <Link prefetch={false} href={`/research#${id}`} key={id}>
+              <div>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </div>
+              <ArrowUpRight />
+            </Link>
           ))}
         </div>
       </section>
-
-      <section className="field-break">
-        <OpticalField variant="b" label="A bright layered research field with responsive symbols" />
-        <div className="field-caption">
-          <span>VCT.02</span>
-          <p>Research should become infrastructure. Infrastructure should disappear into the work.</p>
-        </div>
-      </section>
-
-      <section className="instrument-section">
-        <div className="instrument-copy">
-          <p className="section-index">03 / CONCEPTUAL INSTRUMENT</p>
-          <h2>See the transition, not just the answer.</h2>
-          <p>An agent proposes an action. Vivacity keeps the state, isolates possible outcomes, and preserves the evidence behind the path that follows. This instrument is conceptual, but the system boundary is the point.</p>
-          <Link href="/docs" className="text-link">Read the working concepts <span>↗</span></Link>
-        </div>
-        <div className="instrument-host"><RuntimeInstrument /></div>
-      </section>
-
-      <section className="state-atlas">
-        <div className="atlas-heading">
-          <p className="section-index">04 / EXECUTABLE WORLDS</p>
-          <h2>Between a world model and the world it is asked to predict.</h2>
-          <p>Vivacity is designed around a hard boundary: state records what is true, action proposes a transition, and execution determines what can become true next.</p>
-        </div>
-        <div className="atlas-grid">
-          <article>
-            <FluidImage src="/plate-orbit.webp" alt="A sampled orbital observation with three candidate trajectories" zoom={1.12} />
-            <div><span>STATE VIEW / 01</span><h3>Orbital state</h3></div>
-          </article>
-          <article>
-            <FluidImage src="/plate-contact.webp" alt="A sampled contact field around a robotic gripper" zoom={1.2} />
-            <div><span>STATE VIEW / 02</span><h3>Contact action</h3></div>
-          </article>
-          <article>
-            <FluidImage src="/plate-fluid.webp" alt="A sampled flow field around an asymmetric obstacle" zoom={1.16} />
-            <div><span>STATE VIEW / 03</span><h3>Flow state</h3></div>
-          </article>
-        </div>
-      </section>
-
-      <section className="partners-section">
+      <section className="cinema-closing" data-nav-theme="dark">
+        <h2>
+          Make the next
+          <br />
+          experiment count.
+        </h2>
         <div>
-          <p className="section-index">05 / SELECT PARTNERS</p>
-          <h2>Working closely with a small number of ambitious technical teams.</h2>
-        </div>
-        <div className="partners-copy">
-          <p>We partner with selected startups where the hard part is not generating an answer. It is building an agent that can operate inside a real, changing system.</p>
-          <p>Engagements are technical, focused, and shaped around the problem. If that sounds like your work, we should talk.</p>
-          <Link href="/early-access" className="button button-accent">Start a conversation <ArrowUpRight /></Link>
-        </div>
-      </section>
-
-      <section className="closing-section">
-        <p className="section-index">VIVACITY / 2026</p>
-        <h2>We are building for agents that have somewhere to be.</h2>
-        <div>
-          <a href={demoHref} {...demoLinkProps} className="button button-light">Talk to the team <ArrowUpRight /></a>
-          <a href={'mailto:' + siteConfig.email}>{siteConfig.email}</a>
+          <p>
+            Have a robotics task with a failure you need to understand? Help
+            shape the tools around a real engineering question.
+          </p>
+          <Link prefetch={false} href="/schedule" className="cinema-pill">
+            Talk to us <ArrowUpRight size={18} />
+          </Link>
         </div>
       </section>
       <SiteFooter />
